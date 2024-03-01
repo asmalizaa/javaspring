@@ -134,9 +134,93 @@ The default value of a field depends on its data type.
 
 ## Import Declaration
 
+Import statement in Java is helpful to take a class or all classes visible for a program specified under a package, with the help of a single statement. It is pretty beneficial as the programmer do not require to write the entire class definition. Hence, it improves the readability of the program. 
+
+***import package1[.package2].(*);***
+
 ## Declaring Methods of a Class
 
+This is the general form of a method:
+
+***type name(parameter-list) {***<br/>
+***// body of method***<br/>
+***}***
+
+- Type specifies the type of data returned by the method. This can be any valid type, including class types that you create. If the method does not return a value, its return type must be void.
+- The name of the method is specified by name. This can be any legal identifier other than those already used by other items within the current scope.
+- The parameter-list is a sequence of type and identifier pairs separated by commas. Parameters are essentially variables that receive the value of the arguments passed to the method when it is called. If the method has no parameters, then the parameter list will be empty.
+
+```java
+// This program includes a method inside the box class.
+class Box {
+    double width;
+    double height;
+    double depth;
+
+    // display volume of a box
+    void volume() {
+        System.out.print("Volume is ");
+        System.out.println(width * height * depth);
+    }
+}
+```
+
+### Returning a value
+
+Java method can only return a single value.
+
+```java
+// Now, volume() returns the volume of a box.
+class Box {
+    double width;
+    double height;
+    double depth;
+
+    // compute and return volume
+    double volume() {
+        return width * height * depth;
+    }
+}
+```
+
+### Method that takes parameters
+
+```java
+// This program uses a parameterized method.
+class Box {
+    double width;
+    double height;
+    double depth;
+
+    // compute and return volume
+    double volume() {
+        return width * height * depth;
+    }
+
+    // sets dimensions of box
+    void setDim(double w, double h, double d) {
+        width = w;
+        height = h;
+        depth = d;
+    }
+}
+```
+
 ## Local Variables
+
+The variables declared inside the body of the method are termed local variables. 
+
+```java
+public static int add(int a, int b){
+    // Creating a sum to add the numbers
+    // sum is local variable
+    // a and b are also local variables
+    int sum = a + b;
+ 
+    // Returning the sum of int data type
+    return sum;
+}
+```
 
 ## Instance Methods
 
