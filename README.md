@@ -1,7 +1,7 @@
 # Java Programming and Spring Framework
 
 1. [Writing Java Program](https://github.com/asmalizaa/javaspring/blob/main/Writing%20Java%20Programs.md)
-2. Data Types and Operators
+2. [Data Types and Operators](https://github.com/asmalizaa/javaspring/blob/main/Data%20Types%20and%20Operators.md)
 3. Statements
 4. Classes and Objects
 5. The Object and Object Clasess
