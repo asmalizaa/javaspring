@@ -134,15 +134,45 @@ In summary, a Java program combines code, objects, and logic to create powerful 
 
 In this activity, you are going to write your first Java program using Eclipse.
 
-1. Createa a new Java project called **FirstProject**.
-2. Add a new Java class called **HelloWorld**. Make sure to tick the option to add main method.
-3. In the main method, add code to display **Hello World!** to the console.
+1. Launch eclipse.
+2. Close the welcome page.
+3. Create a new Java project via File > New > Java Project.
+
+   ![image](https://github.com/asmalizaa/javaspring/assets/23090837/dd2a039a-ccca-43cd-b63b-a04c131a4918)
+
+5. In the New Java Project wizard, enter below details.
+   - Project name: HelloProject
+   - Module: Unchecked
+   - Leave everything else to default settings and click Finish to proceed.
+
+     ![image](https://github.com/asmalizaa/javaspring/assets/23090837/004e915c-b5f6-40d3-bf56-d6923b4eb082)
+
+6. Next is to create a new class. Right-click project > New > Class.
+
+   ![image](https://github.com/asmalizaa/javaspring/assets/23090837/40c7c223-76c8-4795-a0a3-ef158ba1cc6a)
+
+   Enter HelloProgram at Name field, then click Finish.
+
+   ![image](https://github.com/asmalizaa/javaspring/assets/23090837/4c7c4451-bc55-4897-b448-1f278715e084)
+
+7. Enter below codes in the HelloProgram class.
 
    ```java
-   System.out.println("Hello World!");
+   public class HelloProgram {
+      public static void main(String[] args) {
+         System.out.println("Hello World!");
+      }
+   }
    ```
    
-4. To run the program, right-click project > Run As > Java Application.
-5. You should see the "Hello World!" message displayed in the console.
+8. To run the program, go to Run > Run.
+
+   ![image](https://github.com/asmalizaa/javaspring/assets/23090837/4adb3f6e-bc05-4d25-8de7-15288b71c545)
+
+9. The string “Hello World!” should be displayed in the console/output.
+
+   ![image](https://github.com/asmalizaa/javaspring/assets/23090837/a42e7d9c-caeb-4f46-a8d3-8d973b24670c)
+
+
 
 The end.
