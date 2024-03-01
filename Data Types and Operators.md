@@ -169,14 +169,99 @@ System.out.println(s);
 
     ![image](https://github.com/asmalizaa/javaspring/assets/23090837/5fd3ea97-0d5f-4a05-9e66-7b6711843802)
 
+### The for-each style for loop
+
+  - For-each is another array traversing technique like for loop, while loop, do-while loop introduced in Java5.
+  - It starts with the keyword for like a normal for-loop.
+  - Instead of declaring and initializing a loop counter variable, you declare a variable that is the same type as the base type of the array, followed by a colon, which is then followed by the array name.
+  - In the loop body, you can use the loop variable you created rather than using an indexed array element.
+  - It’s commonly used to iterate over an array or a Collections class (eg, ArrayList)
+
+    ```java
+    int[] numbers = {1, 2, 3, 4, 5};
+    int total = 0;
+
+    for(int num : numbers) {
+      total += num;
+    }
+    System.out.println("Total is " + total);
+    ```
+
 ## Operator
 
-## Assignment Operator
+Java provides a rich operator environment. Most of its operators can be divided into the following four groups: arithmetic, bitwise, relational, and logical.
 
-## Arithmetic Operators
+### Assignment Operator
 
-## String Concatenation Operator
+  - The assignment operator is the single equal sign, =.
+  - The assignment operator works in Java much as it does in any other computer language.
+  - It has this general form:
 
-## Relational Operators
+    ***var = expression;***
 
-## Boolean Operators
+### Arithmetic Operators
+
+<table>
+  <tr><th>Operator</th><th>Description</th></tr>
+  <tr><td>+</td><td>Addition (also unary plus)</td></tr>
+  <tr><td>-</td><td>Subtraction (also unary minus)</td></tr>
+  <tr><td>*</td><td>Multiply</td></tr>
+  <tr><td>/</td><td>Division</td></tr>
+  <tr><td>%</td><td>Modulus</td></tr>
+  <tr><td>++</td><td>Increment</td></tr>
+  <tr><td>--</td><td>Decrement</td></tr>
+  <tr><td>+=</td><td>Addition Assignment</td></tr>
+  <tr><td>-=</td><td>Subtraction Assignment</td></tr>
+  <tr><td>*=</td><td>Multiplication Assignment</td></tr>
+  <tr><td>/=</td><td>Division Assignment</td></tr>
+  <tr><td>%=</td><td>Modulus Assignment</td></tr>
+</table>
+
+### Bitwise Operators
+
+<table>
+  <tr><th>Operator</th><th>Description</th></tr>
+  <tr><td>~</td><td>Bitwise unary NOT</td></tr>
+  <tr><td>&</td><td>Bitwise AND</td></tr>
+  <tr><td>|</td><td>Bitwise OR</td></tr>
+  <tr><td>^</td><td>Bitwise exclusive OR</td></tr>
+  <tr><td>>></td><td>Shift right</td></tr>
+  <tr><td>>>></td><td>Shift right zero fill</td></tr>
+  <tr><td><<</td><td>Shift left</td></tr>
+  <tr><td>&=</td><td>Bitwise AND Assignment</td></tr>
+  <tr><td>|=</td><td>Bitwise OR Assignment</td></tr>
+  <tr><td>^=</td><td>Bitwise exclusive OR Assignment</td></tr>
+  <tr><td>>>=</td><td>Shift right Assignment</td></tr>
+  <tr><td>>>>=</td><td>Shift right zero fill Assignment</td></tr>
+  <tr><td><<=</td><td>Shift left Assignment</td></tr>
+</table>
+
+### Relational Operators
+
+<table>
+  <tr><th>Operator</th><th>Description</th></tr>
+  <tr><td>==</td><td>Equal to</td></tr>
+  <tr><td>!=</td><td>Not equal to</td></tr>
+  <tr><td>></td><td>Greater than</td></tr>
+  <tr><td><</td><td>Less than</td></tr>
+  <tr><td>>=</td><td>Greater than or equal to</td></tr>
+  <tr><td><=</td><td>Less than or equal to</td></tr>
+</table>
+
+### Boolean Logical Operators
+
+<table>
+  <tr><th>Operator</th><th>Description</th></tr>
+  <tr><td>&</td><td>Logical AND</td></tr>
+  <tr><td>|</td><td>Logical OR</td></tr>
+  <tr><td>^</td><td>Logical XOR (exclusive OR)</td></tr>
+  <tr><td>||</td><td>Short-circuit OR</td></tr>
+  <tr><td>&&</td><td>Short-circuit AND</td></tr>
+  <tr><td>!</td><td>Logical unary NOT</td></tr>
+  <tr><td>&=</td><td>AND Assignment</td></tr>
+  <tr><td>|=</td><td>OR Assignment</td></tr>
+  <tr><td>^=</td><td>XOR Assignment</td></tr>
+  <tr><td>==</td><td>Equal to</td></tr>
+  <tr><td>!=</td><td>Not equal to</td></tr>
+  <tr><td>?:</td><td>Ternary if-then-else</td></tr>
+</table>
