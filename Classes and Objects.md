@@ -208,7 +208,7 @@ class Box {
 
 ## Local Variables
 
-The variables declared inside the body of the method are termed local variables. 
+The variables declared inside the body of the method are termed local variables. The scope of local variables is only within the method's block.
 
 ```java
 public static int add(int a, int b){
