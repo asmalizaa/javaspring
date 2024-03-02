@@ -5,7 +5,7 @@
 3. [Statements](https://github.com/asmalizaa/javaspring/blob/main/Statements.md)
 4. [Classes and Objects](https://github.com/asmalizaa/javaspring/blob/main/Classes%20and%20Objects.md)
 5. [The Object and Object Clasess](https://github.com/asmalizaa/javaspring/blob/main/The%20Object%20and%20Object%20Clasess.md)
-6. Java Package
+6. [Java Package](https://github.com/asmalizaa/javaspring/blob/main/Java%20Package.md)
 7. Exception Handling
 8. Wrapper Classes
 9. Inheritance and Interface
