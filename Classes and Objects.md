@@ -224,8 +224,75 @@ public static int add(int a, int b){
 
 ## Instance Methods
 
+Instance methods are methods that require an object of its class to be created before it can be called. To invoke an instance method, we have to create an Object of the class in which the method is defined. 
+
+- Instance method(s) belong to the Object of the class, not to the class i.e. they can be called after creating the Object of the class.
+- Instance methods are not stored on a per-instance basis, even with virtual methods. They’re stored in a single memory location, and they only “know” which object they belong to because this pointer is passed when you call them.
+- They can be overridden since they are resolved using dynamic binding at run time.
+
+```java
+// Example to illustrate accessing the instance method .
+import java.io.*;
+
+class Foo {
+    String name = "";
+
+	// Instance method to be called within the
+	// same class or from a another class defined
+	// in the same package or in different package.
+	public void geek(String name) {
+        this.name = name;
+    }
+}
+
+class GFG {
+	public static void main(String[] args){
+
+		// create an instance of the class.
+		Foo ob = new Foo();
+
+		// calling an instance method in the class 'Foo'.
+		ob.geek("GeeksforGeeks");
+		System.out.println(ob.name);
+	}
+}
+```
+
 ## Class Methods
 
-## Invoking a Method
+Static methods are the methods in Java that can be called without creating an object of class. They are referenced by the class name itself or reference to the Object of that class.  
 
-## Access Level for Class Member
+- Static method(s) are associated with the class in which they reside i.e. they are called without creating an instance of the class i.e ClassName.methodName(args).
+- They are designed with the aim to be shared among all objects created from the same class.
+- Static methods can not be overridden, since they are resolved using static binding by the compiler at compile time. However, we can have the same name methods declared static in both superclass and subclass, but it will be called Method Hiding as the derived class method will hide the base class method.
+
+```java
+// Example to illustrate Accessing
+// the Static method(s) of the class.
+import java.io.*;
+
+class Geek {
+
+	public static String geekName = "";
+
+	public static void geek(String name){
+		geekName = name;
+	}
+}
+
+class GFG {
+	public static void main(String[] args){
+
+		// Accessing the static method geek()
+		// and field by class name itself.
+		Geek.geek("vaibhav");
+		System.out.println(Geek.geekName);
+
+		// Accessing the static method geek()
+		// by using Object's reference.
+		Geek obj = new Geek();
+		obj.geek("mohit");
+		System.out.println(obj.geekName);
+	}
+}
+```
