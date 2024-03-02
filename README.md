@@ -4,7 +4,7 @@
 2. [Data Types and Operators](https://github.com/asmalizaa/javaspring/blob/main/Data%20Types%20and%20Operators.md)
 3. [Statements](https://github.com/asmalizaa/javaspring/blob/main/Statements.md)
 4. [Classes and Objects](https://github.com/asmalizaa/javaspring/blob/main/Classes%20and%20Objects.md)
-5. The Object and Object Clasess
+5. [The Object and Object Clasess](https://github.com/asmalizaa/javaspring/blob/main/The%20Object%20and%20Object%20Clasess.md)
 6. Java Package
 7. Exception Handling
 8. Wrapper Classes
