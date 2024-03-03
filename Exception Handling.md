@@ -33,16 +33,172 @@ Java defines several types of exceptions that relate to its various class librar
 
 ## Using a try-catch Block
 
+- The try statement allows you to define a block of code to be tested for errors while it is being executed.
+- The catch statement allows you to define a block of code to be executed, if an error occurs in the try block.
+- The try and catch keywords come in pairs.
+
+```java
+try {
+  //  Block of code to try
+}
+catch(Exception e) {
+  //  Block of code to handle errors
+}
+```
+
+Consider the following example (without exception handling):
+
+```java
+public class Main {
+    public static void main(String[ ] args) {
+        int[] myNumbers = {1, 2, 3};
+        System.out.println(myNumbers[10]); // error!
+    }
+}
+```
+
+If an error occurs, we can use try...catch to catch the error and execute some code to handle it:
+
+```java
+public class Main {
+    public static void main(String[ ] args) {
+        try {
+            int[] myNumbers = {1, 2, 3};
+            System.out.println(myNumbers[10]);
+        } catch (Exception e) {
+            System.out.println("Something went wrong.");
+        }
+    }
+}
+```
+
 ## The finally Block
+
+The finally statement lets you execute code, after try...catch, regardless of the result:
+
+```java
+public class Main {
+  public static void main(String[] args) {
+    try {
+      int[] myNumbers = {1, 2, 3};
+      System.out.println(myNumbers[10]);
+    } catch (Exception e) {
+      System.out.println("Something went wrong.");
+    } finally {
+      System.out.println("The 'try catch' is finished.");
+    }
+  }
+}
+```
 
 ## Arranging Multiple Catch Blocks
 
+- In some cases, more than one exception could be raised by a single piece of code.
+- To handle this type of situation, you can specify two or more catch clauses, each catching a different type of exception.
+- When an exception is thrown, each catch statement is inspected in order, and the first one whose type matches that of the exception is executed.
+
+```java
+//Demonstrate multiple catch statements.
+class MultipleCatches {
+	public static void main(String args[]) {
+		try {
+			int a = args.length;
+			System.out.println("a = " + a);
+			int b = 42 / a;
+			int c[] = { 1 };
+			c[42] = 99;
+		} catch (ArithmeticException e) {
+			System.out.println("Divide by 0: " + e);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("Array index oob: " + e);
+		}
+		System.out.println("After try/catch blocks.");
+	}
+}
+```
+
 ## Throwing an Exception
+
+- Before you can catch an exception, some code somewhere must throw one.
+- Any code can throw an exception: your code, code from a package written by someone else such as the packages that come with the Java platform, or the Java runtime environment.
+- Regardless of what throws the exception, it’s always thrown with the throw statement.
+- To throw an exception explicitly, using the throw statement. The general form of throw is shown here:
+    ***throw ThrowableInstance;***
+- The flow of execution stops immediately after the throw statement; any subsequent statements are not executed.
+- The nearest enclosing try block is inspected to see if it has a catch statement that matches the type of exception.
+- If it does find a match, control is transferred to that statement. If not, then the next enclosing try statement is inspected, and so on. If no matching catch is found, then the default exception handler halts the program and prints the stack trace.
+
+```java
+//Demonstrate throw.
+class ThrowDemo {
+	static void demoproc() {
+		try {
+			throw new NullPointerException("demo");
+		} catch (NullPointerException e) {
+			System.out.println("Caught inside demoproc.");
+			throw e; // rethrow the exception
+		}
+	}
+
+	public static void main(String args[]) {
+		try {
+			demoproc();
+		} catch (NullPointerException e) {
+			System.out.println("Recaught: " + e);
+		}
+	}
+}
+```
 
 ## Creating an Exception Class
 
+- This is quite easy to do: just define a subclass of Exception.
+- Your subclasses don’t need to implement anything - it is their existence in the type of system that allows you to use them as exceptions.
+
+```java
+//This program creates a custom exception type.
+class MyException extends Exception {
+	private int detail;
+
+	MyException(int a) {
+		detail = a;
+	}
+
+	public String toString() {
+		return "MyException[" + detail + "]";
+	}
+}
+
+class ExceptionDemo {
+	static void compute(int a) throws MyException {
+		System.out.println("Called compute(" + a + ")");
+		if (a > 10)
+			throw new MyException(a);
+		System.out.println("Normal exit");
+	}
+
+	public static void main(String args[]) {
+		try {
+			compute(1);
+			compute(20);
+		} catch (MyException e) {
+			System.out.println("Caught " + e);
+		}
+	}
+}
+```
+
 ## The try-with-resources Block
 
-## Multi-Catch Exceptions
+The try-with-resources statement is a try statement that declares one or more resources. A resource is an object that must be closed after the program is finished with it. The try-with-resources statement ensures that each resource is closed at the end of the statement. Any object that implements java.lang.AutoCloseable, which includes all objects which implement java.io.Closeable, can be used as a resource.
 
-## Re-throwing Exceptions
+The following example reads the first line from a file. It uses an instance of BufferedReader to read data from the file. BufferedReader is a resource that must be closed after the program is finished with it:
+
+```java
+static String readFirstLineFromFile(String path) throws IOException {
+    try (BufferedReader br =
+                   new BufferedReader(new FileReader(path))) {
+        return br.readLine();
+    }
+}
+```
