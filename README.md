@@ -7,7 +7,7 @@
 5. [The Object and Object Clasess](https://github.com/asmalizaa/javaspring/blob/main/The%20Object%20and%20Object%20Clasess.md)
 6. [Java Package](https://github.com/asmalizaa/javaspring/blob/main/Java%20Package.md)
 7. [Exception Handling](https://github.com/asmalizaa/javaspring/blob/main/Exception%20Handling.md)
-8. Wrapper Classes
+8. [Wrapper Classes](https://github.com/asmalizaa/javaspring/blob/main/Wrapper%20Classes.md)
 9. Inheritance and Interface
 10. Pluggable Annotation Processing API
 11. Introduction to Spring
