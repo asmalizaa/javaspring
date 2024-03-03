@@ -73,15 +73,15 @@ The PostConstruct annotation is used on a method that needs to be executed after
 - The method MUST NOT have any parameters except in the case of interceptors in which case it takes an InvocationContext object as defined by the Interceptors specification.
 - The method defined on an interceptor class MUST HAVE one of the following signatures:
 
-  void <METHOD>(InvocationContext)
+  void MethodName (InvocationContext)
 
-  Object <METHOD>(InvocationContext) throws Exception
+  Object MethodName (InvocationContext) throws Exception
 
   Note: A PostConstruct interceptor method must not throw application exceptions, but it may be declared to throw checked exceptions including the java.lang.Exception if the same interceptor method interposes on business or timeout methods in addition to lifecycle events. If a PostConstruct interceptor method returns a value, it is ignored by the container.
 
 - The method defined on a non-interceptor class MUST HAVE the following signature:
 
-  void <METHOD>()
+  void MethodName ()
 
 - The method on which PostConstruct is applied MAY be public, protected, package private or private.
 - The method MUST NOT be static except for the application client.
@@ -95,15 +95,15 @@ The PreDestroy annotation is used on methods as a callback notification to signa
 - The method MUST NOT have any parameters except in the case of interceptors in which case it takes an InvocationContext object as defined by the Interceptors specification.
 - The method defined on an interceptor class MUST HAVE one of the following signatures:
 
-  void <METHOD>(InvocationContext)
+  void MethodName (InvocationContext)
 
-  Object <METHOD>(InvocationContext) throws Exception
+  Object MethodName (InvocationContext) throws Exception
 
   Note: A PreDestroy interceptor method must not throw application exceptions, but it may be declared to throw checked exceptions including the java.lang.Exception if the same interceptor method interposes on business or timeout methods in addition to lifecycle events. If a PreDestroy interceptor method returns a value, it is ignored by the container.
 
 - The method defined on a non-interceptor class MUST HAVE the following signature:
 
-  void <METHOD>()
+  void MethodName ()
 
 - The method on which PreDestroy is applied MAY be public, protected, package private or private.
 - The method MUST NOT be static.
