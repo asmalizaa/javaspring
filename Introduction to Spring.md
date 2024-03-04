@@ -100,3 +100,5 @@ The Test module supports the testing of Spring components with JUnit or TestNG. 
 ## Setup Spring
 
 ## Activity: A First Spring Application
+
+[Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content)
