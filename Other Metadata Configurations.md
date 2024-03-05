@@ -124,3 +124,55 @@ catalog.name=MovieCatalog
 ```
 
 In that case, the catalog parameter and field will be equal to the MovieCatalog value.
+
+## The Spring @Qualifier Annotation
+
+The @Autowired annotation is a great way of making the need to inject a dependency in Spring explicit. Although it’s useful, there are use cases for which this annotation alone isn’t enough for Spring to understand which bean to inject.
+
+By default, Spring resolves autowired entries by type.
+
+If more than one bean of the same type is available in the container, the framework will throw NoUniqueBeanDefinitionException, indicating that more than one bean is available for autowiring.
+
+Let’s imagine a situation in which two possible candidates exist for Spring to inject as bean collaborators in a given instance:
+
+```java
+@Component("fooFormatter")
+public class FooFormatter implements Formatter {
+ 
+    public String format() {
+        return "foo";
+    }
+}
+
+@Component("barFormatter")
+public class BarFormatter implements Formatter {
+ 
+    public String format() {
+        return "bar";
+    }
+}
+
+@Component
+public class FooService {
+     
+    @Autowired
+    private Formatter formatter;
+}
+```
+
+If we try to load FooService into our context, the Spring framework will throw a NoUniqueBeanDefinitionException. This is because Spring doesn’t know which bean to inject. To avoid this problem, there are several solutions; the @Qualifier annotation is one of them.
+
+By using the @Qualifier annotation, we can eliminate the issue of which bean needs to be injected.
+
+Let’s revisit our previous example to see how we solve the problem by including the @Qualifier annotation to indicate which bean we want to use:
+
+```java
+public class FooService {
+     
+    @Autowired
+    @Qualifier("fooFormatter")
+    private Formatter formatter;
+}
+```
+
+By including the @Qualifier annotation, together with the name of the specific implementation we want to use, in this example Foo, we can avoid ambiguity when Spring finds multiple beans of the same type.
