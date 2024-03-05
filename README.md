@@ -20,7 +20,6 @@
 18. Transaction Management
 19. Develop Web Applications using the Spring Framework - Spring MVC
 20. Thymeleaf
-21. Advanced Techniques
-22. Spring Controllers and AJAX
-23. RESTFul Web Services
-24. Spring Security
+21. Spring Controllers and AJAX
+22. RESTFul Web Services
+23. Spring Security
