@@ -177,3 +177,53 @@ This example was referenced from these two tutorials.
 
    - The hello() method we’ve added is designed to take a String parameter called name, and then combine this parameter with the word "Hello" in the code.     This means that if you set your name to "Amy" in the request, the response would be "Hello Amy".
    - The @RestController annotation tells Spring that this code describes an endpoint that should be made available over the web. The @GetMapping(“/hello”) tells Spring to use our hello() method to answer requests that get sent to the http://localhost:8080/hello address. Finally, the @RequestParam is telling Spring to expect a name value in the request, but if it’s not there, it will use the word "World" by default.
+
+6. Run the application by right-click the project > Run As > Java Application > select DemoApplication from the list > OK
+
+   To test > type in your browser's address > (http://localhost/hello)
+   
+6. Create a Web Controller
+
+   In Spring’s approach to building web sites, HTTP requests are handled by a controller. You can easily identify the controller by the @Controller annotation. In the following example, GreetingController handles GET requests for /greeting by returning the name of a View (in this case, greeting). A View is responsible for rendering the HTML content. The following listing (from src/main/java/com/example/servingwebcontent/GreetingController.java) shows the controller:
+
+   - Create a new Java class called GreetingController.
+   - Replace the codes with below.
+
+     ```java
+     package com.example.demo;
+
+     import org.springframework.stereotype.Controller;
+     import org.springframework.ui.Model;
+     import org.springframework.web.bind.annotation.GetMapping;
+     import org.springframework.web.bind.annotation.RequestParam;
+    
+     @Controller
+     public class GreetingController {
+    
+    	@GetMapping("/greeting")
+    	public String greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
+    			Model model) {
+    		model.addAttribute("name", name);
+    		return "greeting";
+    	}
+     }
+     ```
+
+     This controller is concise and simple, but there is plenty going on. We break it down step by step.
+
+     - The @GetMapping annotation ensures that HTTP GET requests to /greeting are mapped to the greeting() method.
+     - @RequestParam binds the value of the query string parameter name into the name parameter of the greeting() method. This query string parameter is not required. If it is absent in the request, the defaultValue of World is used. The value of the name parameter is added to a Model object, ultimately making it accessible to the view template.
+     - The implementation of the method body relies on a view technology (in this case, Thymeleaf) to perform server-side rendering of the HTML. Thymeleaf parses the greeting.html template and evaluates the th:text expression to render the value of the ${name} parameter that was set in the controller.The following listing (from src/main/resources/templates/greeting.html) shows the greeting.html template:
+
+    ```html
+    <!DOCTYPE HTML>
+    <html xmlns:th="http://www.thymeleaf.org">
+    <head> 
+        <title>Getting Started: Serving Web Content</title> 
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <p th:text="|Hello, ${name}!|" />
+    </body>
+    </html>
+    ```
