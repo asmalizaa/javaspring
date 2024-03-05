@@ -1,5 +1,7 @@
 # Dependency Injection
 
+Reference: (https://docs.spring.io/spring-framework/reference/core/beans/dependencies/factory-collaborators.html)
+
 ### What Is Dependency Injection?
 
 Dependency injection is a pattern we can use to implement IoC, where the control being inverted is setting an object’s dependencies.
@@ -107,6 +109,8 @@ While constructing the Store object, if there’s no constructor or setter metho
 We can also achieve this using XML configuration.
 
 ## Bean Scopes
+
+Reference: (https://docs.spring.io/spring-framework/reference/core/beans/factory-scopes.html)
 
 When you create a bean definition, you create a recipe for creating actual instances of the class defined by that bean definition. The idea that a bean definition is a recipe is important, because it means that, as with a class, you can create many object instances from a single recipe.
 
