@@ -137,3 +137,36 @@ To set the item attribute in the example above, we can use metadata. Then the co
   }
   ```
 
+  The above code will be equivalent to the following XML configuration:
+
+  ```java
+  <beans>
+      <bean id = "helloWorld" class = "com.tutorialspoint.HelloWorld" />
+  </beans>
+  ```
+
+- Here, the method name is annotated with @Bean works as bean ID and it creates and returns the actual bean. Your configuration class can have a declaration for more than one @Bean.
+- Once your configuration classes are defined, you can load and provide them to Spring container using AnnotationConfigApplicationContext as follows:
+
+  ```java
+  public static void main(String[] args) {
+      ApplicationContext ctx = new AnnotationConfigApplicationContext(HelloWorldConfig.class);
+      HelloWorld helloWorld = ctx.getBean(HelloWorld.class);
+      helloWorld.setMessage("Hello World!");
+      helloWorld.getMessage();
+  }
+  ```
+  You can load various configuration classes as follows:
+
+  ```java
+  public static void main(String[] args) {
+      AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+      ctx.register(AppConfig.class, OtherConfig.class);
+      ctx.register(AdditionalConfig.class);
+      ctx.refresh();
+
+      MyService myService = ctx.getBean(MyService.class);
+      myService.doStuff();
+  }
+  ```
+  
