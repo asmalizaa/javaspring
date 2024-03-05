@@ -125,3 +125,99 @@ You can control not only the various dependencies and configuration values that 
     <tr><td>application</td><td>Scopes a single bean definition to the lifecycle of a ServletContext. Only valid in the context of a web-aware Spring ApplicationContext.</td></tr>
     <tr><td>websocket</td><td>Scopes a single bean definition to the lifecycle of a WebSocket. Only valid in the context of a web-aware Spring ApplicationContext.</td></tr>
 </table>
+
+## Using @Autowired
+
+Reference: (https://docs.spring.io/spring-framework/reference/core/beans/annotation-config/autowired.html)
+
+You can apply the @Autowired annotation to constructors, as the following example shows:
+
+```java
+public class MovieRecommender {
+
+	private final CustomerPreferenceDao customerPreferenceDao;
+
+	@Autowired
+	public MovieRecommender(CustomerPreferenceDao customerPreferenceDao) {
+		this.customerPreferenceDao = customerPreferenceDao;
+	}
+
+	// ...
+}
+```
+
+You can also apply the @Autowired annotation to traditional setter methods, as the following example shows:
+
+```java
+public class SimpleMovieLister {
+
+	private MovieFinder movieFinder;
+
+	@Autowired
+	public void setMovieFinder(MovieFinder movieFinder) {
+		this.movieFinder = movieFinder;
+	}
+
+	// ...
+}
+```
+
+You can also apply the annotation to methods with arbitrary names and multiple arguments, as the following example shows:
+
+```java
+public class MovieRecommender {
+
+	private MovieCatalog movieCatalog;
+
+	private CustomerPreferenceDao customerPreferenceDao;
+
+	@Autowired
+	public void prepare(MovieCatalog movieCatalog,
+			CustomerPreferenceDao customerPreferenceDao) {
+		this.movieCatalog = movieCatalog;
+		this.customerPreferenceDao = customerPreferenceDao;
+	}
+
+	// ...
+}
+```
+
+You can apply @Autowired to fields as well and even mix it with constructors, as the following example shows:
+
+```java
+public class MovieRecommender {
+
+	private final CustomerPreferenceDao customerPreferenceDao;
+
+	@Autowired
+	private MovieCatalog movieCatalog;
+
+	@Autowired
+	public MovieRecommender(CustomerPreferenceDao customerPreferenceDao) {
+		this.customerPreferenceDao = customerPreferenceDao;
+	}
+
+	// ...
+}
+```
+
+By default, autowiring fails when no matching candidate beans are available for a given injection point. In the case of a declared array, collection, or map, at least one matching element is expected.
+
+## Using @PostConstruct and @PreDestroy
+
+Introduced in Spring 2.5, the support for these annotations offers an alternative to the lifecycle callback mechanism described in initialization callbacks and destruction callbacks. Provided that the CommonAnnotationBeanPostProcessor is registered within the Spring ApplicationContext, a method carrying one of these annotations is invoked at the same point in the lifecycle as the corresponding Spring lifecycle interface method or explicitly declared callback method. In the following example, the cache is pre-populated upon initialization and cleared upon destruction:
+
+```java
+public class CachingMovieLister {
+
+	@PostConstruct
+	public void populateMovieCache() {
+		// populates the movie cache upon initialization...
+	}
+
+	@PreDestroy
+	public void clearMovieCache() {
+		// clears the movie cache upon destruction...
+	}
+}
+```
