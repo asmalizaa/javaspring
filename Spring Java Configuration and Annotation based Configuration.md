@@ -170,3 +170,41 @@ To set the item attribute in the example above, we can use metadata. Then the co
   }
   ```
   
+## The @Import Annotation
+
+The @Import annotation allows for loading @Bean definitions from another configuration class. Consider a ConfigA class as follows:
+
+```java
+@Configuration
+public class ConfigA {
+   @Bean
+   public A a() {
+      return new A(); 
+   }
+}
+```
+
+You can import above Bean declaration in another Bean Declaration as follows:
+
+```java
+@Configuration
+@Import(ConfigA.class)
+public class ConfigB {
+   @Bean
+   public B b() {
+      return new B(); 
+   }
+}
+```
+
+Now, rather than needing to specify both ConfigA.class and ConfigB.class when instantiating the context, only ConfigB needs to be supplied as follows:
+
+```java
+public static void main(String[] args) {
+   ApplicationContext ctx = new AnnotationConfigApplicationContext(ConfigB.class);
+   
+   // now both beans A and B will be available...
+   A a = ctx.getBean(A.class);
+   B b = ctx.getBean(B.class);
+}
+```
