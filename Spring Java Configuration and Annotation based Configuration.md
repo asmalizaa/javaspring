@@ -92,7 +92,7 @@ The advantages of this architecture are:
 
 We can achieve Inversion of Control through various mechanisms such as: Strategy design pattern, Service Locator pattern, Factory pattern, and Dependency Injection (DI).
 
-### The Spring IoC Container
+## The Spring IoC Container
 
 An IoC container is a common characteristic of frameworks that implement IoC.
 
@@ -117,4 +117,23 @@ AnnotationConfigApplicationContext annotationContext = new AnnotationConfigAppli
 When you create an instance of AnnotationConfigApplicationContext and provide it with one or more configuration classes, it scans these classes for the @Bean annotations and other relevant annotations. It then initializes and manages the beans defined in these classes, setting up their dependencies and managing their lifecycle. You can find the detailed example here.
 
 To set the item attribute in the example above, we can use metadata. Then the container will read this metadata and use it to assemble beans at runtime.
+
+## @Configuration & @Bean Annotations
+
+- Annotating a class with the @Configuration indicates that the class can be used by the Spring IoC container as a source of bean definitions.
+- The @Bean annotation tells Spring that a method annotated with @Bean will return an object that should be registered as a bean in the Spring application context.
+- The simplest possible @Configuration class would be as follow:
+
+  ```java
+  package com.tutorialspoint;
+  import org.springframework.context.annotation.*;
+
+  @Configuration
+  public class HelloWorldConfig {
+      @Bean
+      public HelloWorld helloWorld(){
+          return new HelloWorld();
+      }
+  }
+  ```
 
