@@ -180,9 +180,26 @@ This example was referenced from these two tutorials.
 
 6. Run the application by right-click the project > Run As > Java Application > select DemoApplication from the list > OK
 
-   To test > type in your browser's address > (http://localhost/hello)
-   
-6. Create a Web Controller
+   To test > type in your browser's address > (http://localhost:8080/hello)
+
+7. Create an index.html in src/main/resources/static folder with codes below.
+
+   ```html
+   <!DOCTYPE html>
+   <html>
+   <head>
+       <meta charset="UTF-8">
+       <title>Welcome Page</title>
+   </head>
+   <body>
+       <h1>Welcome Page</h1>
+       <p>Hello! Please click <a href="/hello">here</a> to say "Hello World!"</p>
+   </body>
+   </html>
+   ```
+Re-run the application and test. This time, use this instead (http://localhost:8080)
+
+9. Create a Web Controller
 
    In Spring’s approach to building web sites, HTTP requests are handled by a controller. You can easily identify the controller by the @Controller annotation. In the following example, GreetingController handles GET requests for /greeting by returning the name of a View (in this case, greeting). A View is responsible for rendering the HTML content. The following listing (from src/main/java/com/example/servingwebcontent/GreetingController.java) shows the controller:
 
