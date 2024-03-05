@@ -73,3 +73,153 @@ In general, Tight Coupling is bad in but most of the time, because it reduces fl
 - Tight coupling does not provide the concept of interface. But loose coupling helps us follow the GOF principle of program to interfaces, not implementations.
 - In Tight coupling, it is not easy to swap the codes between two classes. But it’s much easier to swap other pieces of code/modules/objects/components in loose coupling.
 - Tight coupling does not have the changing capability. But loose coupling is highly changeable.
+
+## The IoC Container
+
+Spring Official Reference: (https://docs.spring.io/spring-framework/reference/core/beans.html)
+
+### What Is Inversion of Control?
+
+Inversion of Control is a principle in software engineering which transfers the control of objects or portions of a program to a container or framework. We most often use it in the context of object-oriented programming.
+
+In contrast with traditional programming, in which our custom code makes calls to a library, IoC enables a framework to take control of the flow of a program and make calls to our custom code. To enable this, frameworks use abstractions with additional behavior built in. If we want to add our own behavior, we need to extend the classes of the framework or plugin our own classes.
+
+The advantages of this architecture are:
+- decoupling the execution of a task from its implementation
+- making it easier to switch between different implementations
+- greater modularity of a program
+- greater ease in testing a program by isolating a component or mocking its dependencies, and allowing components to communicate through contracts
+
+We can achieve Inversion of Control through various mechanisms such as: Strategy design pattern, Service Locator pattern, Factory pattern, and Dependency Injection (DI).
+
+### What Is Dependency Injection?
+
+Dependency injection is a pattern we can use to implement IoC, where the control being inverted is setting an object’s dependencies.
+
+Connecting objects with other objects, or “injecting” objects into other objects, is done by an assembler rather than by the objects themselves.
+
+Here’s how we would create an object dependency in traditional programming:
+
+```java
+public class Store {
+    private Item item;
+ 
+    public Store() {
+        item = new ItemImpl1();    
+    }
+}
+```
+
+In the example above, we need to instantiate an implementation of the Item interface within the Store class itself.
+
+By using DI, we can rewrite the example without specifying the implementation of the Item that we want:
+
+```java
+public class Store {
+    private Item item;
+    public Store(Item item) {
+        this.item = item;
+    }
+}
+```
+
+### The Spring IoC Container
+
+An IoC container is a common characteristic of frameworks that implement IoC.
+
+In the Spring framework, the interface ApplicationContext represents the IoC container. The Spring container is responsible for instantiating, configuring and assembling objects known as beans, as well as managing their life cycles.
+
+The Spring framework provides several implementations of the ApplicationContext interface: AnnotationConfigApplicationContext, ClassPathXmlApplicationContext and FileSystemXmlApplicationContext for standalone applications, and WebApplicationContext for web applications.
+
+In order to assemble beans, the container uses configuration metadata, which can be in the form of XML configuration or annotations.
+
+Here’s one way to manually instantiate a container:
+
+```java
+ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+```
+
+And here’s an example of manually instantiating a container using AnnotationConfigApplicationContext:
+
+```java
+AnnotationConfigApplicationContext annotationContext = new AnnotationConfigApplicationContext();
+```
+
+When you create an instance of AnnotationConfigApplicationContext and provide it with one or more configuration classes, it scans these classes for the @Bean annotations and other relevant annotations. It then initializes and manages the beans defined in these classes, setting up their dependencies and managing their lifecycle. You can find the detailed example here.
+
+To set the item attribute in the example above, we can use metadata. Then the container will read this metadata and use it to assemble beans at runtime.
+
+Dependency Injection in Spring can be done through constructors, setters or fields.
+
+### Constructor-Based Dependency Injection
+
+In the case of constructor-based dependency injection, the container will invoke a constructor with arguments each representing a dependency we want to set.
+
+Spring resolves each argument primarily by type, followed by name of the attribute, and index for disambiguation. Let’s see the configuration of a bean and its dependencies using annotations:
+
+```java
+@Configuration
+public class AppConfig {
+
+    @Bean
+    public Item item1() {
+        return new ItemImpl1();
+    }
+
+    @Bean
+    public Store store() {
+        return new Store(item1());
+    }
+}
+```
+
+- The @Configuration annotation indicates that the class is a source of bean definitions. We can also add it to multiple configuration classes.
+- We use the @Bean annotation on a method to define a bean. If we don’t specify a custom name, then the bean name will default to the method name.
+- For a bean with the default singleton scope, Spring first checks if a cached instance of the bean already exists, and only creates a new one if it doesn’t. If we’re using the prototype scope, the container returns a new bean instance for each method call.
+
+Another way to create the configuration of the beans is through XML configuration:
+
+```java
+<bean id="item1" class="org.baeldung.store.ItemImpl1" /> 
+<bean id="store" class="org.baeldung.store.Store"> 
+    <constructor-arg type="ItemImpl1" index="0" name="item" ref="item1" /> 
+</bean>
+```
+
+### Setter-Based Dependency Injection
+
+For setter-based DI, the container will call setter methods of our class after invoking a no-argument constructor or no-argument static factory method to instantiate the bean. Let’s create this configuration using annotations:
+
+```java
+@Bean
+public Store store() {
+    Store store = new Store();
+    store.setItem(item1());
+    return store;
+}
+```
+
+We can also use XML for the same configuration of beans:
+
+```java
+<bean id="store" class="org.baeldung.store.Store">
+    <property name="item" ref="item1" />
+</bean>
+```
+
+We can combine constructor-based and setter-based types of injection for the same bean. The Spring documentation recommends using constructor-based injection for mandatory dependencies, and setter-based injection for optional ones.
+
+### Field-Based Dependency Injection
+
+In case of Field-Based DI, we can inject the dependencies by marking them with an @Autowired annotation:
+
+```java
+public class Store {
+    @Autowired
+    private Item item; 
+}
+```
+
+While constructing the Store object, if there’s no constructor or setter method to inject the Item bean, the container will use reflection to inject Item into Store.
+
+We can also achieve this using XML configuration.
