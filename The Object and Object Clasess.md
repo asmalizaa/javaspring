@@ -165,52 +165,37 @@ public class GFG {
 
 ## String Representation of an Object
 
-To compare two objects to check for equality, override the equals() method.
+Now we will be dealing with one of its methods known as toString() method. We typically generally do use the toString() method to get the string representation of an object. It is very important and readers should be aware that whenever we try to print the object reference then internally toString() method is invoked. If we did not define the toString() method in your class then the Object class toString() method is invoked otherwise our implemented or overridden toString() method will be called.
 
 ```java
-// Java Program to Compare Two Objects
+// Java Program to print string representation of object
+public class Box {
 
-import java.io.*;
+	// instance variables
+	// default access modifier - accessible within the package only
+	private double width;
+	private double height;
+	private double depth;
+	private String name;
 
-class Pet {
-	String name;
-	int age;
-	String breed;
-
-	Pet(String name, int age, String breed){
-		this.name = name;
-		this.age = age;
-		this.breed = breed;
+	public Box() {
+		System.out.println("Box constructor executed...");
+		width = 10;
+		height = 10;
+		depth = 10;
+		name = "box";
+		updateCounter();
 	}
 
-	@Override public boolean equals(Object obj){
-		// checking if the two objects pointing to same object
-		if (this == obj) {
-			return true;
-		}
-
-		// checking for two condition:
-		// 1) object is pointing to null
-		// 2) if the objects belong to same class or not
-		if (obj == null || this.getClass() != obj.getClass()){
-			return false;
-		}
-
-		Pet p1 = (Pet)obj; // type casting object to the intended class type
-
-		// checking if the two  objects share all the same values
-		return this.name.equals(p1.name)
-			&& this.age == p1.age
-			&& this.breed.equals(p1.breed);
+	public double calculateVolume() {
+		// calculate volume for box
+		return width * height * depth;
 	}
-}
 
-public class GFG {
-	public static void main(String args[]) {
-		Pet dog1 = new Pet("Snow", 3, "German Shepherd");
-		Pet cat = new Pet("Jack", 2, "Tabby");
-		Pet dog2 = new Pet("Snow", 3, "German Shepherd");
-		System.out.println(dog1.equals(dog2));
+	@Override
+	public String toString() {
+		return "== Box Details ==\n" + "Name = " + name + "\n" + "Width = " + width + "\n" + "Height = " + height + "\n"
+				+ "Depth = " + depth + "\n" + "Volume = " + calculateVolume() + "\n";
 	}
 }
 ```
