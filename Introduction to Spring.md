@@ -150,7 +150,7 @@ This example was referenced from these two tutorials.
    - Maven configuration file: pom.xml
 
 4. At this moment, you cannot run and test your application, since it is still empty. So we are going to write a simple service that will display "Hello World!" message.
-5. To do that, update DemoApplication.java to look like below codes.
+5. To do that, replace DemoApplication.java with codes below.
 
    ```java
    package com.example.demo;
@@ -173,4 +173,8 @@ This example was referenced from these two tutorials.
     	    }
     }
    ```
-   
+   This is all the code required to create a simple "Hello World" web service in Spring Boot.
+
+  The hello() method we’ve added is designed to take a String parameter called name, and then combine this parameter with the word "Hello" in the code.     This means that if you set your name to "Amy" in the request, the response would be “Hello Amy”.
+
+  The @RestController annotation tells Spring that this code describes an endpoint that should be made available over the web. The @GetMapping(“/hello”) tells Spring to use our hello() method to answer requests that get sent to the http://localhost:8080/hello address. Finally, the @RequestParam is telling Spring to expect a name value in the request, but if it’s not there, it will use the word "World" by default.
