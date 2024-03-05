@@ -16,7 +16,7 @@
 14. [The Spring Container and API](https://github.com/asmalizaa/javaspring/blob/main/The%20Spring%20Container%20and%20API.md)
 15. [Other Metadata Configurations](https://github.com/asmalizaa/javaspring/blob/main/Other%20Metadata%20Configurations.md)
 16. [Spring AOP](https://github.com/asmalizaa/javaspring/blob/main/Spring%20AOP.md)
-17. Spring and Persistence
+17. [Spring and Persistence](https://github.com/asmalizaa/javaspring/blob/main/Spring%20and%20Persistence.md)
 18. Data Access Support
 19. Transaction Management
 20. ORM Integration
