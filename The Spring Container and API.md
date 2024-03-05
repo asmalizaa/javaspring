@@ -201,7 +201,8 @@ Spring provides three ways to implement the life cycle of a bean. In order to un
      public class Client {
          // Main driver method
          public static void main(String[] args) throws Exception {
-             // Loading the Spring XML configuration file into Spring container and it will create the instance of the bean as it loads into container
+             // Loading the Spring XML configuration file into Spring container
+             // and it will create the instance of the bean as it loads into container
              ConfigurableApplicationContext cap = new ClassPathXmlApplicationContext("resources/spring.xml");
 
              // It will close the Spring container and as a result invokes the destroy() method
