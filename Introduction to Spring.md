@@ -197,9 +197,9 @@ This example was referenced from these two tutorials.
    </body>
    </html>
    ```
-Re-run the application and test. This time, use this instead (http://localhost:8080)
+   Re-run the application and test. This time, use this instead (http://localhost:8080)
 
-9. Create a Web Controller
+8. Create a Web Controller
 
    In Spring’s approach to building web sites, HTTP requests are handled by a controller. You can easily identify the controller by the @Controller annotation. In the following example, GreetingController handles GET requests for /greeting by returning the name of a View (in this case, greeting). A View is responsible for rendering the HTML content. The following listing (from src/main/java/com/example/servingwebcontent/GreetingController.java) shows the controller:
 
