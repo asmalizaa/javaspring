@@ -145,5 +145,10 @@ This example was referenced from these two tutorials.
    - Right-click anywhere in Package Explorer > Import > Maven > Existing Maven Projects > browse to the location of the extracted project > Finish
    - Wait until project loaded completely before proceed to the next step.
 
-3. 
+3. Review the newly created project.
+   - It should contain one java class: DemoApplication.java, this will be your project starting file.
+   - Maven configuration file: pom.xml
+
+4. At this moment, you cannot run and test your application, since it is still empty. So we are going to write a simple service that will display "Hello World!" message.
+5. 
    
