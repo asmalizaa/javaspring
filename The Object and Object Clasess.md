@@ -106,6 +106,63 @@ class Main {
 
 ## Comparing Objects for Equality
 
+You can use equals() method from Object class to compare objects. Although equals() method can be used to compare the values of two strings, it is not really useful by default to compare two objects without overriding it.
+
+```java
+// Java Program to Compare Two Objects
+
+import java.io.*;
+
+class Pet {
+	String name;
+	int age;
+	String breed;
+
+	Pet(String name, int age, String breed)
+	{
+		this.name = name;
+		this.age = age;
+		this.breed = breed;
+	}
+	@Override public boolean equals(Object obj)
+	{
+
+		// checking if the two objects
+		// pointing to same object
+		if (this == obj)
+			return true;
+
+		// checking for two condition:
+		// 1) object is pointing to null
+		// 2) if the objects belong to
+		// same class or not
+		if (obj == null
+			|| this.getClass() != obj.getClass())
+			return false;
+
+		Pet p1 = (Pet)obj; // type casting object to the
+						// intended class type
+
+		// checking if the two 
+		// objects share all the same values
+		return this.name.equals(p1.name)
+			&& this.age == p1.age
+			&& this.breed.equals(p1.breed);
+	}
+}
+
+public class GFG {
+	public static void main(String args[])
+	{
+
+		Pet dog1 = new Pet("Snow", 3, "German Shepherd");
+		Pet cat = new Pet("Jack", 2, "Tabby");
+		Pet dog2 = new Pet("Snow", 3, "German Shepherd");
+		System.out.println(dog1.equals(dog2));
+	}
+}
+```
+
 ## String Representation of an Object
 
 To compare two objects to check for equality, override the equals() method.
