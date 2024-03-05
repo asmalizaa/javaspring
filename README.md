@@ -17,12 +17,10 @@
 15. [Other Metadata Configurations](https://github.com/asmalizaa/javaspring/blob/main/Other%20Metadata%20Configurations.md)
 16. [Spring AOP](https://github.com/asmalizaa/javaspring/blob/main/Spring%20AOP.md)
 17. [Spring and Persistence](https://github.com/asmalizaa/javaspring/blob/main/Spring%20and%20Persistence.md)
-18. Data Access Support
-19. Transaction Management
-20. ORM Integration
-21. Develop Web Applications using the Spring Framework - Spring MVC
-22. Thymeleaf
-23. Advanced Techniques
-24. Spring Controllers and AJAX
-25. RESTFul Web Services
-26. Spring Security
+18. Transaction Management
+19. Develop Web Applications using the Spring Framework - Spring MVC
+20. Thymeleaf
+21. Advanced Techniques
+22. Spring Controllers and AJAX
+23. RESTFul Web Services
+24. Spring Security
