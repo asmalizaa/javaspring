@@ -99,6 +99,24 @@ The Test module supports the testing of Spring components with JUnit or TestNG. 
 
 ## Setup Spring
 
+There are two ways to start creating Spring project.
+
+1. Spring Tools (STS)
+
+   You can download the installer from [here](https://spring.io/tools)
+   - Choose Spring Tools 4 for Eclipse.
+   - Download installer for you respective OS eg. Windows.
+   - Once downloaded, double-click to extract the files.
+   - Move the extracted files to your working directory (optional).
+   - Launch the STS.
+
+2. Spring Initializr (https://start.spring.io/)
+
+   This is web-based project bootstrap portal. You can configure your project here, generate and download the zip file, extract and import it into your IDE eg. Eclipse.
+   
+
+   
+   
 ## Activity: A First Spring Application
 
 [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content)
