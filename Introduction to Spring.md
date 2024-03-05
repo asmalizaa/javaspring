@@ -119,4 +119,31 @@ There are two ways to start creating Spring project.
    
 ## Activity: A First Spring Application
 
-[Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content)
+This example was referenced from these two tutorials.
+1. [Spring Quickstart Guide](https://spring.io/guides/gs/serving-web-content)
+2. [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content)
+
+**Steps**
+
+1. Create a new spring project using Spring Initializr. Configure the new project with below settings.
+   - Project: Maven
+   - Language: Java
+   - Spring Boot: default
+   - Project Metadata:
+     - Group: com.example
+     - Artifact: firstdemo
+     - Name: firstdemo
+     - Description: First demo project for Spring
+     - Package name: com.example.demo
+   - Packaging: JAR
+   - Java: choose the installed on your machine, else use default
+   - Dependencies: Spring Web, Thymeleaf
+
+   Once done, click "Generate", this will download the zip file.
+
+2. Extract the zip file. Then import the maven project into Eclipse.
+   - Right-click anywhere in Package Explorer > Import > Maven > Existing Maven Projects > browse to the location of the extracted project > Finish
+   - Wait until project loaded completely before proceed to the next step.
+
+3. 
+   
