@@ -15,7 +15,7 @@
 13. [Dependency Injection](https://github.com/asmalizaa/javaspring/blob/main/Dependency%20Injection.md)
 14. [The Spring Container and API](https://github.com/asmalizaa/javaspring/blob/main/The%20Spring%20Container%20and%20API.md)
 15. [Other Metadata Configurations](https://github.com/asmalizaa/javaspring/blob/main/Other%20Metadata%20Configurations.md)
-16. Sping AOP
+16. Spring AOP
 17. Spring Specifics
 18. Spring and Persistence
 19. Data Access Support
