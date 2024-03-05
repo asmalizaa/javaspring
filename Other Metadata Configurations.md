@@ -4,17 +4,38 @@
 
 Spring Annotations allow us to configure dependencies and implement dependency injection through java programs. Those are a form of metadata that provides data about a program. The @Required annotation in spring is a method-level annotation used in the setter method of a bean property and therefore making the setter-injection compulsory. This annotation suggests that the required bean property must be injected with a value at the configuration time which we will show and explain in the following example.  
 
-1. First, let’s create a simple Spring Application and inject the literal values by setter injection. So, create a simple class Student having three attributes rollNo, name, and age. Create setter methods for these two attributes and a simple method to print the details of the student.
-2. Let’s create a properties file in your classpath and name the file as student-info.properties (for this example we name it like this, you can name it according to your need). And in this file, we are going to write something like this.
-3.  Let’s set the values from the properties file by using the @Value Annotation. So, we can modify our Student.java file something like this.
-4.  Now let’s create a Student Bean in the beans.xml file. Below is the complete code for the beans.xml file.
-5.  So now our bean is ready. Now let’s create a class and define the main() method inside that class. Suppose we have created a class named Main and we have defined the main() method inside this class. Below is the code for the Main.java class. Comments are added inside the code for better understanding.
-6.  Now run your main() method and the output will be like this.
-7.  So our application is working fine. Now let’s come again to the Student.java file and remove the @Value(“${student.rollNo}”) before the setRollNo() method. So now our modified Student.java file is something like this as follows:
-8.  Now again run your main() method and the output will be like this.
-9.  So the Student class object is created but the Roll no value has not been assigned. But we want the Roll No value must be filled before creating the Student class object. You can consider like Roll no is a primary key and we don’t want this value as null. So here @Required Annotation comes into the picture. So if we modify our Student.java file as the following them we are going to get exceptions in our program.
-10.  So in this scenario, the exception console is trying to tell us that it’s mandatory to provide the value to the Roll no to create the Student class object. So if you want some field value must be filled with some value then you should use the @Required Annotation. So we can modify our Student.java file something like this as follows:
-11.  Return the program again and you are going to get the output as below as shown:
+```java
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.beans.factory.annotation.Value;
+
+public class Student {
+
+	private int rollNo;
+	private String name;
+	private int age;
+
+	@Required
+	public void setRollNo(int rollNo) {
+		this.rollNo = rollNo;
+	}
+
+	@Value("${student.name}")
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Value("${student.age}")
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public void display(){
+		System.out.println("Roll No: " + rollNo);
+		System.out.println("Name: " + name);
+		System.out.println("Age: " + age);
+	}
+}
+```
 
 ## Injection with @Resource
 
@@ -69,3 +90,37 @@ public class MovieRecommender {
 	// ...
 }
 ```
+
+## Using @Value
+
+Reference: (https://docs.spring.io/spring-framework/reference/core/beans/annotation-config/value-annotations.html)
+
+@Value is typically used to inject externalized properties:
+
+```java
+@Component
+public class MovieRecommender {
+
+    private final String catalog;
+
+    public MovieRecommender(@Value("${catalog.name}") String catalog) {
+        this.catalog = catalog;
+    }
+}
+```
+
+With the following configuration:
+
+```java
+@Configuration
+@PropertySource("classpath:application.properties")
+public class AppConfig { }
+```
+
+And the following application.properties file:
+
+```java
+catalog.name=MovieCatalog
+```
+
+In that case, the catalog parameter and field will be equal to the MovieCatalog value.
