@@ -12,7 +12,7 @@
 10. [Pluggable Annotation Processing API](https://github.com/asmalizaa/javaspring/blob/main/Pluggable%20Annotation%20Processing%20API.md)
 11. [Introduction to Spring](https://github.com/asmalizaa/javaspring/blob/main/Introduction%20to%20Spring.md)
 12. [Spring Java Configuration and Annotation based Configuration](https://github.com/asmalizaa/javaspring/blob/main/Spring%20Java%20Configuration%20and%20Annotation%20based%20Configuration.md)
-13. Dependency Injection
+13. [Dependency Injection](https://github.com/asmalizaa/javaspring/blob/main/Dependency%20Injection.md)
 14. The Spring Container and API
 15. Other Metadata Configurations
 16. Sping AOP
