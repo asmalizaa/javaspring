@@ -56,4 +56,28 @@ NOTES: We are going to continue this example using previous (existing) project c
     }
     ```
 
+   ```java
+   package com.example.springjpademo;
 
+   import javax.persistence.Entity;
+   import javax.persistence.GeneratedValue;
+   import javax.persistence.GenerationType;
+   import javax.persistence.Id;
+   import javax.persistence.OneToOne;
+   import javax.persistence.Table;
+
+   @Entity
+   @Table(name = "address")
+   public class Address {
+       @Id
+       @GeneratedValue(strategy = GenerationType.AUTO)
+       private Long id;
+   
+       @Column(name = "address")
+       private String address;
+
+       // one to one mapping means, one employee stays at one address only
+       @OneToOne
+       private Employee employee;
+}
+   ```
