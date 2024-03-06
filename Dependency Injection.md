@@ -512,24 +512,38 @@ Reference: (https://docs.spring.io/spring-framework/reference/core/beans/annotat
 Introduced in Spring 2.5, the support for these annotations offers an alternative to the lifecycle callback mechanism described in initialization callbacks and destruction callbacks. Provided that the CommonAnnotationBeanPostProcessor is registered within the Spring ApplicationContext, a method carrying one of these annotations is invoked at the same point in the lifecycle as the corresponding Spring lifecycle interface method or explicitly declared callback method. In the following example, the cache is pre-populated upon initialization and cleared upon destruction:
 
 ```java
-package com.example.di.field;
+package com.example.di.setter;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 
 @Component
-public class GreetingService {
+public class MessageSender {
 
-	public GreetingService() {
-		System.out.println("GreetingService constructor called...");
+	private MessageService messageService;
+	private MessageService smsService;
+
+	@Autowired
+	public void setMessageService(@Qualifier("emailService") MessageService messageService) {
+		this.messageService = messageService;
+		System.out.println("setter based dependency injection 1");
 	}
 
-	public String greet() {
-		return "Hello from GreetingService!";
+	@Autowired
+	public void setSmsService(MessageService smsService) {
+		this.smsService = smsService;
+		System.out.println("setter based dependency injection 2");
 	}
 
+	public void sendMessage(String message) {
+		this.messageService.sendMessage(message);
+		this.smsService.sendMessage(message);
+	}
+	
 	@PostConstruct
 	public void first() {
 		System.out.println("PostConstruct first() invoked...");
@@ -538,6 +552,30 @@ public class GreetingService {
 	@PreDestroy
 	public void second() {
 		System.out.println("PreDestroy second invoked...");
+	}
+}
+```
+
+Update the application class to below codes.
+
+```java
+package com.example.di.setter;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+@SpringBootApplication
+public class ClientApp {
+
+	public static void main(String[] args) {
+		String message = "Hi, good morning have a nice day!.";
+		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(MessageConfig.class);
+
+		MessageSender messageSender = applicationContext.getBean(MessageSender.class);
+		messageSender.sendMessage(message);
+		
+		// closing the context will call destroy()
+		applicationContext.close();
 	}
 }
 ```
