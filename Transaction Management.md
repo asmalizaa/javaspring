@@ -29,7 +29,7 @@ In this example, we will create an application to store user information along w
 
 NOTES: We are going to continue this example using previous (existing) project created in "Spring and Persistence".
 
-1. Create model class.
+1. Create model classes.
 
    In this step, we will create our model class. Here, we will be creating two model classes, Employee and Address.
 
@@ -122,7 +122,7 @@ NOTES: We are going to continue this example using previous (existing) project c
    }
    ```
 
-2. Create the repository.
+2. Create the repositories.
 
    ```java
    package com.example.springjpademo;
@@ -144,10 +144,85 @@ NOTES: We are going to continue this example using previous (existing) project c
    }
    ```
 
-3. Create the service.
+3. Create the services.
 
    You can use @Transactional annotation in service layer which will result interacting with the database. In this step, we will create a service layer for our application and add business logic to it. For this, we will be creating two classes EmployeeService and AddressService. In EmployeeService class we are throwing an exception.
 
    ```java
+   package com.example.springjpademo;
+
+   import javax.transaction.Transactional;
+   import org.springframework.beans.factory.annotation.Autowired;
+   import org.springframework.stereotype.Service;
+
+   @Service
+   public class EmployeeService {
+      @Autowired
+      private EmployeeRepository employeeRepository;
+
+      @Autowired
+      private AddressService addressService;
+
+      @Transactional
+      public Employee addEmployee(Employee employee) throws Exception {
+         Employee employeeSavedToDB = this.employeeRepository.save(employee);
+
+         Address address = new Address();
+         address.setId(123L);
+         address.setAddress("Varanasi");
+         address.setEmployee(employee);
+
+         // calling addAddress() method of AddressService class
+         this.addressService.addAddress(address);
+         return employeeSavedToDB;
+      }
+   }
+   ```
+
+   ```java
+   package com.example.springjpademo;
+
+   import org.springframework.beans.factory.annotation.Autowired;
+   import org.springframework.stereotype.Service;
+
+   @Service
+   public class AddressService {
+       @Autowired
+       private AddressRepository addressRepository;
+
+       public Address addAddress(Address address) {
+           Address addressSavedToDB = this.addressRepository.save(address);
+           return addressSavedToDB;
+       }
+   }
+   ```
+
+4. Create the controller.
+
+   In this step, we will create a controller for our application. For this, we will create a Controller class and add all the mappings to it.
+
+   ```java
+   package com.example.springjpademo;
+
+   import org.springframework.beans.factory.annotation.Autowired;
+   import org.springframework.http.HttpStatus;
+   import org.springframework.http.ResponseEntity;
+   import org.springframework.web.bind.annotation.PostMapping;
+   import org.springframework.web.bind.annotation.RequestBody;
+   import org.springframework.web.bind.annotation.RequestMapping;
+   import org.springframework.web.bind.annotation.RestController;
+
+   @RestController
+   @RequestMapping("/api/employee")
+   public class TransactionController {
+       @Autowired
+       private EmployeeService employeeService;
+
+       @PostMapping("/add")
+       public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee) throws Exception {
+           Employee employeeSavedToDB = this.employeeService.addEmployee(employee);
+           return new ResponseEntity<Employee>(employeeSavedToDB, HttpStatus.CREATED);
+       }
+   }
    ```
    
