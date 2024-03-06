@@ -18,8 +18,8 @@
 16. [Spring AOP](https://github.com/asmalizaa/javaspring/blob/main/Spring%20AOP.md)
 17. Spring and Persistence
 18. Transaction Management
-19. Develop Web Applications using the Spring Framework - Spring MVC
-20. Thymeleaf
-21. Spring Controllers and AJAX
-22. RESTFul Web Services
+19. RESTFul Web Services
+20. Develop Web Applications using the Spring Framework - Spring MVC
+21. Thymeleaf
+22. Spring Controllers and AJAX
 23. Spring Security
