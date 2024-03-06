@@ -121,7 +121,7 @@ This architecture means each service can:
 - Run its own unique process
 - Communicate autonomously without having to rely on the other microservices or the application as a whole
 
-## Activity
+## Activity: Greeting Service
 
 Reference: (https://spring.io/guides/gs/rest-service)
 
