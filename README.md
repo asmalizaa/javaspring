@@ -17,7 +17,7 @@
 15. [Other Metadata Configurations](https://github.com/asmalizaa/javaspring/blob/main/Other%20Metadata%20Configurations.md)
 16. [Spring AOP](https://github.com/asmalizaa/javaspring/blob/main/Spring%20AOP.md)
 17. [RESTFul Web Services](https://github.com/asmalizaa/javaspring/blob/main/RESTFul%20Web%20Services.md)
-18. Spring and Persistence
+18. [Spring and Persistence](https://github.com/asmalizaa/javaspring/blob/main/Spring%20and%20Persistence.md)
 19. Transaction Management
 20. Develop Web Applications using the Spring Framework - Spring MVC
 21. Thymeleaf
