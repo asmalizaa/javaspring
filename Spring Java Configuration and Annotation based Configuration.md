@@ -125,7 +125,6 @@ To set the item attribute in the example above, we can use metadata. Then the co
 - The simplest possible @Configuration class would be as follow:
 
   ```java
-  package com.tutorialspoint;
   import org.springframework.context.annotation.*;
 
   @Configuration
@@ -145,6 +144,27 @@ To set the item attribute in the example above, we can use metadata. Then the co
   </beans>
   ```
 
+  This is the HelloWorld.java codes.
+
+  ```java
+  public class HelloWorld {
+
+	private String message;
+
+	public HelloWorld() {
+
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+  }
+  ```
+  
 - Here, the method name is annotated with @Bean works as bean ID and it creates and returns the actual bean. Your configuration class can have a declaration for more than one @Bean.
 - Once your configuration classes are defined, you can load and provide them to Spring container using AnnotationConfigApplicationContext as follows:
 
