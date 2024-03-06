@@ -29,4 +29,31 @@ In this example, we will create an application to store user information along w
 
 NOTES: We are going to continue this example using previous (existing) project created in "Spring and Persistence".
 
+1. Create model class.
+
+   In this step, we will create our model class. Here, we will be creating two model classes, Employee and Address.
+
+   ```java
+   package com.example.springjpademo;
+
+    import javax.persistence.Column;
+    import javax.persistence.Entity;
+    import javax.persistence.GeneratedValue;
+    import javax.persistence.GenerationType;
+    import javax.persistence.Id;
+    import javax.persistence.Table;
+
+    @Entity
+    @Table(name = "employee")
+    public class Employee {
+    
+    	@Id
+    	@GeneratedValue(strategy = GenerationType.AUTO)
+    	private int id;
+    
+    	@Column(name = "name")
+    	private String name;
+    }
+    ```
+
 
