@@ -240,4 +240,64 @@ NOTES: We are going to continue this example using previous (existing) project c
 
    In this step, we will break down our transaction. For this, we will initialize the address object with a NULL value in our EmployeeService class.
 
-   
+   ```java
+   package com.example.springjpademo;
+
+   import javax.transaction.Transactional;
+   import org.springframework.beans.factory.annotation.Autowired;
+   import org.springframework.stereotype.Service;
+
+   @Service
+   public class EmployeeService {
+       @Autowired
+       private EmployeeRepository employeeRepository;
+
+       @Autowired
+       private AddressService addressService;
+
+       @Transactional
+       public Employee addEmployee(Employee employee) throws Exception {
+           Employee employeeSavedToDB = this.employeeRepository.save(employee);
+
+           // we will initialize the address object as null
+           Address address = null;
+           address.setId(123L);
+           address.setAddress("Varanasi");
+           address.setEmployee(employee);
+
+           // calling addAddress() method of AddressService class
+           this.addressService.addAddress(address);
+           return employeeSavedToDB;
+       }
+   }
+   ```
+
+   Now, we will delete our table from the database and again run our application and will request the application to create an employee
+
+   As we can see in the above media file, we have initialized the address object as null and requested the application, we have an employee created in the database but the address information is not, as we have received a null pointer exception. But, this is not good practice in transaction management, as employees should be saved only when the address is saved and vice-versa.
+
+7. Transaction management.
+
+   To overcome this problem, we will use @Transactional annotation. This will ensure that the transaction should be complete. That is, either both employee and address data should be stored or nothing will get stored. For using transaction management, we need to use @EnableTransactionManagement in the main class of our spring boot application and also, and we need to annotate our addEmployee() method in EmployeeService class with @Transactional annotation.
+
+   ```java
+   package com.example.springjpademo;
+
+   import org.springframework.boot.SpringApplication;
+   import org.springframework.boot.autoconfigure.SpringBootApplication;
+   import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+   @SpringBootApplication
+   @EnableTransactionManagement
+   public class TransactionManagementApplication {
+       public static void main(String[] args) {
+           SpringApplication.run(TransactionManagementApplication.class, args);
+       }
+   }
+   ```
+
+8. Run the application.
+
+   Now, we have enabled transaction management for our application. We will again delete the tables from our database and request our application to add an employee.
+
+   As we can see in the above media file, this time the employee data do not get stored in the database, nor did the address data. This way the spring has handled the transaction that both employees and address data gets stored or no data gets stored.
