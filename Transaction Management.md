@@ -53,6 +53,22 @@ NOTES: We are going to continue this example using previous (existing) project c
     
     	@Column(name = "name")
     	private String name;
+
+       public int getId() {
+           return id;
+       }
+
+       public void setId(int id) {
+           this.id = id;
+       }
+
+       public String getName() {
+           return name;
+       }
+
+       public void setName(String name) {
+           this.name = name;
+       }
     }
     ```
 
@@ -79,5 +95,59 @@ NOTES: We are going to continue this example using previous (existing) project c
        // one to one mapping means, one employee stays at one address only
        @OneToOne
        private Employee employee;
-}
+
+       public Long getId() {
+           return id;
+       }
+
+       public void setId(Long id) {
+           this.id = id;
+       }
+
+       public String getAddress() {
+           return address;
+       }
+
+       public void setAddress(String address) {
+           this.address = address;
+       }
+
+       public Employee getEmployee() {
+           return employee;
+       }
+
+       public void setEmployee(Employee employee) {
+           this.employee = employee;
+       }
+   }
    ```
+
+2. Create the repository.
+
+   ```java
+   package com.example.springjpademo;
+
+   import org.springframework.data.jpa.repository.JpaRepository;
+
+   public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
+
+   }
+   ```
+
+   ```java
+   package com.example.springjpademo;
+
+   import org.springframework.data.jpa.repository.JpaRepository;
+
+   public interface AddressRepository extends JpaRepository<Address, Integer> {
+
+   }
+   ```
+
+3. Create the service.
+
+   You can use @Transactional annotation in service layer which will result interacting with the database. In this step, we will create a service layer for our application and add business logic to it. For this, we will be creating two classes EmployeeService and AddressService. In EmployeeService class we are throwing an exception.
+
+   ```java
+   ```
+   
