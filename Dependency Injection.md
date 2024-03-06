@@ -512,16 +512,32 @@ Reference: (https://docs.spring.io/spring-framework/reference/core/beans/annotat
 Introduced in Spring 2.5, the support for these annotations offers an alternative to the lifecycle callback mechanism described in initialization callbacks and destruction callbacks. Provided that the CommonAnnotationBeanPostProcessor is registered within the Spring ApplicationContext, a method carrying one of these annotations is invoked at the same point in the lifecycle as the corresponding Spring lifecycle interface method or explicitly declared callback method. In the following example, the cache is pre-populated upon initialization and cleared upon destruction:
 
 ```java
-public class CachingMovieLister {
+package com.example.di.field;
+
+import org.springframework.stereotype.Component;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+
+@Component
+public class GreetingService {
+
+	public GreetingService() {
+		System.out.println("GreetingService constructor called...");
+	}
+
+	public String greet() {
+		return "Hello from GreetingService!";
+	}
 
 	@PostConstruct
-	public void populateMovieCache() {
-		// populates the movie cache upon initialization...
+	public void first() {
+		System.out.println("PostConstruct first() invoked...");
 	}
 
 	@PreDestroy
-	public void clearMovieCache() {
-		// clears the movie cache upon destruction...
+	public void second() {
+		System.out.println("PreDestroy second invoked...");
 	}
 }
 ```
