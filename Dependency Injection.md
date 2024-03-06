@@ -330,18 +330,85 @@ We can combine constructor-based and setter-based types of injection for the sam
 
 ### Field-Based Dependency Injection
 
+Reference: (https://www.javacodegeeks.com/2019/02/spring-field-dependency-injection-example.html)
+
 In case of Field-Based DI, we can inject the dependencies by marking them with an @Autowired annotation:
 
+Let's start by creating a component/service to be injected.
+
 ```java
-public class Store {
-    @Autowired
-    private Item item; 
+package com.example.di.field;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class GreetingService {
+
+	public GreetingService() {
+		System.out.println("GreetingService constructor called...");
+	}
+
+	public String greet() {
+		return "Hello from GreetingService!";
+	}
 }
 ```
 
-While constructing the Store object, if there’s no constructor or setter method to inject the Item bean, the container will use reflection to inject Item into Store.
+Next, create a controller component where the service will be injected.
 
-We can also achieve this using XML configuration.
+```java
+package com.example.di.field;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/greet")
+public class GreetingController {
+
+	@Autowired
+	GreetingService gs;
+
+	@GetMapping
+	public String testgreeting() {
+		return gs.greet();
+	}
+}
+```
+
+Don't forget the configuration and application classes.
+
+```java
+package com.example.di.field;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ComponentScan("com.example.di.field")
+public class GreetConfig {
+
+}
+```
+
+```java
+package com.example.di.field;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class GreetingApp {
+
+	public static void main(String[] args) {
+		SpringApplication.run(GreetingApp.class, args);
+	}
+}
+```
+
+Run the application. Test it in browser by typing (http://localhost:8080/greet)
 
 ## Bean Scopes
 
