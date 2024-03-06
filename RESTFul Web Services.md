@@ -57,8 +57,20 @@ REST API
 - Each URL is called a request while the data sent back to you is called a response.
 
 Web Server
-The term web server can refer to hardware or software, or both working together.
-
+- The term web server can refer to hardware or software, or both working together.
 - On the hardware side, a web server is a computer that stores web server software and a website's component files. (For example, HTML documents, images, CSS stylesheets, and JavaScript files) A web server connects to the Internet and supports physical data interchange with other devices connected to the web.
 - On the software side, a web server includes several parts that control how web users access hosted files. At a minimum, this is an HTTP server. An HTTP server is software that understands URLs (web addresses) and HTTP (the protocol your browser uses to view webpages). An HTTP server can be accessed through the domain names of the websites it stores, and it delivers the content of these hosted websites to the end user's device.
 
+## How does REST API works 
+
+<table>
+  <tr><th>Terminology</th><th>Description</th></tr>
+  <tr><td>Client</td><td>The person or program using the API. 
+The client makes requests to the API to retrieve some information or change something within the application.
+Your browser is a client – it interacts with APIs for different websites to get page content. The requested info is sent back to your browser and displayed.
+</td></tr>
+  <tr><td>Resource</td><td>Any piece of information that the API can provide the client.
+For instance, a resource in Facebook’s API could be a user, a page, a photo, or a post. Each resource has a unique name, called the resource identifier.
+</td></tr>
+  <tr><td>Server</td><td>Used by the application that receives client request i.e., service, and contains resources that the client wants. The server has an API to interact with clients without giving them direct access to content stored in its database.</td></tr>
+</table>
