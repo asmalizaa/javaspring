@@ -579,3 +579,14 @@ public class ClientApp {
 	}
 }
 ```
+
+Rerun the application and verify the output.
+
+```java
+setter based dependency injection 1
+setter based dependency injection 2
+PostConstruct first() invoked...
+Hi, good morning have a nice day!.
+Hi, good morning have a nice day!.
+PreDestroy second invoked...
+```
