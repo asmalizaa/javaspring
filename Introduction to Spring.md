@@ -163,6 +163,7 @@ This example was referenced from these two tutorials.
     import org.springframework.web.bind.annotation.RequestParam;
     
     @SpringBootApplication
+    @RestController
     public class DemoApplication {
     
     	public static void main(String[] args) {
