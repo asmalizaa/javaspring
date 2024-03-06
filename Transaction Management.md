@@ -225,4 +225,19 @@ NOTES: We are going to continue this example using previous (existing) project c
        }
    }
    ```
+
+5. Run the application and test it using postman.
+
+   ![image](https://github.com/asmalizaa/javaspring/assets/23090837/e1a97d66-6223-4609-9ae2-9fa384d374a6)
+
+   Check database to see if the new record is added.
+
+   ![image](https://github.com/asmalizaa/javaspring/assets/23090837/a9e1ebbd-cd3b-4d8d-94c0-78b5c1b1a2ef)
+
+   ![image](https://github.com/asmalizaa/javaspring/assets/23090837/0a4babab-cf76-407a-b677-40b066a1219c)
+
+6. Interrupt the transaction.
+
+   In this step, we will break down our transaction. For this, we will initialize the address object with a NULL value in our EmployeeService class.
+
    
