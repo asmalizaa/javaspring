@@ -12,3 +12,21 @@
 - So, it is not good practice to store a single action of the transaction(Here, only user info is stored not the payment info).
 
 To overcome these problems, spring provides transaction management, which uses annotation to handle these issues. In such a scenario, spring stores the user information in temporary memory and then checks for payment information if the payment is successful then it will complete the transaction otherwise it will roll back the transaction and the user information will not get stored in the database.
+
+## @Transactional Annotation
+
+- In Spring Boot, @Transactional annotation is used to manage transactions in a Spring boot application and used to define a scope of transaction.
+- This annotation can be applied to the class level or method level.
+- It provides data reliability and consistency.
+- When a method is indicated with @Transactional annotation, it indicates that the particular method should be executed within the context of that transaction.
+- If the transaction becomes successful then the changes made to the database are committed, if any transaction fails, all the changes made to that particular transaction can be rollback and it will ensure that the database remains in a consistent state.
+
+## Example: Configure Transaction in Spring Boot
+
+Reference: (https://www.geeksforgeeks.org/spring-boot-transaction-management-using-transactional-annotation/)
+
+In this example, we will create an application to store user information along with his address information and will use spring transaction management to resolve the transaction break problem.
+
+NOTES: We are going to continue this example using previous (existing) project created in "Spring and Persistence".
+
+
