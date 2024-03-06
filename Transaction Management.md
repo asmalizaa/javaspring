@@ -272,9 +272,9 @@ NOTES: We are going to continue this example using previous (existing) project c
    }
    ```
 
-   Now, we will delete our table from the database and again run our application and will request the application to create an employee
+   Now, we will delete our table from the database and again run our application and will request the application to create an employee.
 
-   As we can see in the above media file, we have initialized the address object as null and requested the application, we have an employee created in the database but the address information is not, as we have received a null pointer exception. But, this is not good practice in transaction management, as employees should be saved only when the address is saved and vice-versa.
+   As a result, we have initialized the address object as null and requested the application, we have an employee created in the database but the address information is not, as we have received a null pointer exception. But, this is not good practice in transaction management, as employees should be saved only when the address is saved and vice-versa.
 
 7. Transaction management.
 
@@ -300,4 +300,4 @@ NOTES: We are going to continue this example using previous (existing) project c
 
    Now, we have enabled transaction management for our application. We will again delete the tables from our database and request our application to add an employee.
 
-   As we can see in the above media file, this time the employee data do not get stored in the database, nor did the address data. This way the spring has handled the transaction that both employees and address data gets stored or no data gets stored.
+   As a result, this time the employee data do not get stored in the database, nor did the address data. This way the spring has handled the transaction that both employees and address data gets stored or no data gets stored.
