@@ -42,32 +42,117 @@ In the case of constructor-based dependency injection, the container will invoke
 Spring resolves each argument primarily by type, followed by name of the attribute, and index for disambiguation. Let’s see the configuration of a bean and its dependencies using annotations:
 
 ```java
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
 @Configuration
-public class AppConfig {
+@ComponentScan("com.example.di")
+public class Config {
 
-    @Bean
-    public Item item1() {
-        return new ItemImpl1();
-    }
+	@Bean
+	public Engine engine() {
+		return new Engine("v8", 5);
+	}
 
-    @Bean
-    public Store store() {
-        return new Store(item1());
-    }
+	@Bean
+	public Transmission transmission() {
+		return new Transmission("sliding");
+	}
 }
 ```
+
+Here we’re using annotations to notify Spring runtime that this class provides bean definitions (@Bean annotation), and that the package com.example.di needs to perform a context scan for additional beans.
 
 - The @Configuration annotation indicates that the class is a source of bean definitions. We can also add it to multiple configuration classes.
 - We use the @Bean annotation on a method to define a bean. If we don’t specify a custom name, then the bean name will default to the method name.
 - For a bean with the default singleton scope, Spring first checks if a cached instance of the bean already exists, and only creates a new one if it doesn’t. If we’re using the prototype scope, the container returns a new bean instance for each method call.
 
-Another way to create the configuration of the beans is through XML configuration:
+Next, we define a Car class.
 
 ```java
-<bean id="item1" class="org.baeldung.store.ItemImpl1" /> 
-<bean id="store" class="org.baeldung.store.Store"> 
-    <constructor-arg type="ItemImpl1" index="0" name="item" ref="item1" /> 
-</bean>
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Car {
+	private final Engine engine;
+	private final Transmission transmission;
+
+	@Autowired
+	public Car(Engine engine, Transmission transmission) {
+		this.engine = engine;
+		this.transmission = transmission;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("Engine: %s Transmission: %s", engine, transmission);
+	}
+}
+```
+
+Here are the definitions of Engine and Transmission.
+
+```java
+public class Engine {
+	private final String type;
+	private final int volume;
+
+	public Engine(String type, int volume) {
+		this.type = type;
+		this.volume = volume;
+		System.out.println("Engine constructor");
+	}
+
+	@Override
+	public String toString() {
+		return String.format("%s %d", type, volume);
+	}
+}
+```
+
+```java
+public class Transmission {
+	private final String type;
+
+	public Transmission(String type) {
+		this.type = type;
+		System.out.println("Transmission constructor");
+	}
+
+	@Override
+	public String toString() {
+		return String.format("%s", type);
+	}
+}
+```
+
+Finally, we need to bootstrap an ApplicationContext using our POJO configuration.
+
+```java
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+@SpringBootApplication
+public class AppRunner {
+
+	public static void main(String[] args) {
+		ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
+
+		Car car = context.getBean(Car.class);
+		System.out.println(car);
+	}
+}
+```
+
+Run the application, verify that the output similar to below.
+
+```java
+Engine constructor
+Transmission constructor
+Engine: v8 5 Transmission: sliding
 ```
 
 ### Setter-Based Dependency Injection
