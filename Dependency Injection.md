@@ -37,6 +37,8 @@ Dependency Injection in Spring can be done through constructors, setters or fiel
 
 ### Constructor-Based Dependency Injection
 
+Reference: (https://www.baeldung.com/constructor-injection-in-spring)
+
 In the case of constructor-based dependency injection, the container will invoke a constructor with arguments each representing a dependency we want to set.
 
 Spring resolves each argument primarily by type, followed by name of the attribute, and index for disambiguation. Let’s see the configuration of a bean and its dependencies using annotations:
@@ -157,23 +159,171 @@ Engine: v8 5 Transmission: sliding
 
 ### Setter-Based Dependency Injection
 
-For setter-based DI, the container will call setter methods of our class after invoking a no-argument constructor or no-argument static factory method to instantiate the bean. Let’s create this configuration using annotations:
+Reference: (https://www.javaguides.net/2023/01/spring-boot-setter-injection-example.html)
+
+For setter-based DI, the container will call setter methods of our class after invoking a no-argument constructor or no-argument static factory method to instantiate the bean. 
+
+In order to demonstrate the usage of setter injection, let's create a few interfaces and classes.
 
 ```java
-@Bean
-public Store store() {
-    Store store = new Store();
-    store.setItem(item1());
-    return store;
+package com.example.di.setter;
+
+public interface MessageService {
+	void sendMessage(String message);
 }
 ```
 
-We can also use XML for the same configuration of beans:
+```java
+package com.example.di.setter;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class EmailService implements MessageService {
+
+	@Override
+	public void sendMessage(String message) {
+		System.out.println(message);
+	}
+
+}
+```
+
+We have annotated EmailService class with @Component annotation so the Spring container automatically creates a Spring bean and manages its life cycle.
 
 ```java
-<bean id="store" class="org.baeldung.store.Store">
-    <property name="item" ref="item1" />
-</bean>
+package com.example.di.setter;
+
+import org.springframework.stereotype.Component;
+
+@Component("smsService")
+public class SMSService implements MessageService {
+
+	@Override
+	public void sendMessage(String message) {
+		 System.out.println(message);
+	}
+
+}
+```
+
+We have annotated SMSService class with @Component annotation so the Spring container automatically creates a Spring bean and manages its life cycle.
+
+In setter injection, Spring will find the @Autowired annotation and call the setter to inject the dependency.
+
+```java
+package com.example.di.setter;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
+public class MessageSender {
+
+	private MessageService messageService;
+
+	@Autowired
+	public void setMessageService(@Qualifier("emailService") MessageService messageService) {
+		this.messageService = messageService;
+		System.out.println("setter based dependency injection 1");
+	}
+
+	public void sendMessage(String message) {
+		this.messageService.sendMessage(message);
+	}
+}
+```
+
+@Qualifier annotation is used in conjunction with Autowired to avoid confusion when we have two or more beans configured for the same type.
+
+```java
+package com.example.di.setter;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ComponentScan(basePackages = "com.example.di.setter")
+public class MessageConfig {
+
+}
+```
+
+@Configuration: Used to indicate that a configuration class declares one or more @Bean methods. These classes are processed by the Spring container to generate bean definitions and service requests for those beans at runtime.
+
+@ComponentScan: This annotation is used to specify the base packages to scan for spring beans/components.
+
+Let's create ApplicationContext and test this example.
+
+```java
+package com.example.di.setter;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+@SpringBootApplication
+public class ClientApp {
+
+	public static void main(String[] args) {
+		String message = "Hi, good morning have a nice day!.";
+		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MessageConfig.class);
+
+		MessageSender messageSender = applicationContext.getBean(MessageSender.class);
+		messageSender.sendMessage(message);
+	}
+}
+```
+
+Run the application and verify the output is similar to the one below.
+
+```java
+setter based dependency injection 1
+Hi, good morning have a nice day!.
+```
+
+To perform multiple dependencies using setter injection, update MessageSender with below codes.
+
+```java
+package com.example.di.setter;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
+public class MessageSender {
+
+	private MessageService messageService;
+	private MessageService smsService;
+
+	@Autowired
+	public void setMessageService(@Qualifier("emailService") MessageService messageService) {
+		this.messageService = messageService;
+		System.out.println("setter based dependency injection 1");
+	}
+
+	@Autowired
+	public void setSmsService(MessageService smsService) {
+		this.smsService = smsService;
+		System.out.println("setter based dependency injection 2");
+	}
+
+	public void sendMessage(String message) {
+		this.messageService.sendMessage(message);
+		this.smsService.sendMessage(message);
+	}
+}
+```
+
+Rerun the application and verify the output.
+
+```java
+setter based dependency injection 1
+setter based dependency injection 2
+Hi, good morning have a nice day!.
+Hi, good morning have a nice day!.
 ```
 
 We can combine constructor-based and setter-based types of injection for the same bean. The Spring documentation recommends using constructor-based injection for mandatory dependencies, and setter-based injection for optional ones.
