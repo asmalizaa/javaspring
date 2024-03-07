@@ -158,13 +158,24 @@ In this activity, we are going to add web pages/forms to our spring data jpa pro
    </head>
    <body>
       <h1>Result</h1>
-      <p th:text="'id: ' + ${tutorial.id}" />
-      <p th:text="'title: ' + ${tutorial.title}" />
-      <p th:text="'description: ' + ${tutorial.description}" />
-      <p th:text="'published: ' + ${tutorial.published}" />
+      <p th:text="'Id: ' + ${tutorial.id}" />
+      <p th:text="'Title: ' + ${tutorial.title}" />
+      <p th:text="'Description: ' + ${tutorial.description}" />
+      <p th:text="'Published: ' + ${tutorial.published}" />
       <a href="/addnew">Add another</a>
    </body>
    </html>
    ```
 
    For clarity, this example uses two separate view templates for rendering the form and displaying the submitted data. However, you can use a single view for both purposes.
+
+5. Test the service.
+
+   Now that the web site is running, visit http://localhost:8080/addnew, where you see the following form.
+
+   <img width="171" alt="image" src="https://github.com/asmalizaa/javaspring/assets/23090837/cefbb518-6015-4f3d-a60e-1f282def3460">
+
+   Submit an ID, Title and Description to see the results.
+
+   <img width="119" alt="image" src="https://github.com/asmalizaa/javaspring/assets/23090837/4164c91b-0d90-40bb-bf81-6c58305eac98">
+
