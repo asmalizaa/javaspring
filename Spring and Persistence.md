@@ -20,8 +20,8 @@ As JPA is just a specification, it does not perform any operation by itself. It 
 
 ## What is Hibernate?
 
-Reference: (https://hibernate.org/)
-Reference: (https://docs.spring.io/spring-framework/reference/data-access/orm/hibernate.html)
+- Reference: (https://hibernate.org/)
+- Reference: (https://docs.spring.io/spring-framework/reference/data-access/orm/hibernate.html)
 
 Hibernate is a Java framework that simplifies the development of Java application to interact with the database. It is an open source, lightweight, ORM (Object Relational Mapping) tool. Hibernate implements the specifications of JPA (Java Persistence API) for data persistence.
 
