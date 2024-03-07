@@ -83,3 +83,62 @@ You can access model attributes in views with Thymeleaf as follows.
 </tr>
 ```
 
+## Activity: Display List of Records
+
+In this activity, we are going to create a page to display list of records.
+
+1. Update index.html to include link to call the list page.
+
+   ```html
+   <!DOCTYPE html>
+   <html>
+   <head>
+       <meta charset="UTF-8">
+       <title>Welcome Page</title>
+   </head>
+   <body>
+       <h1>Welcome Page</h1>
+       <p>Add new tutorial click <a href="/addnew">here</a></p>
+       <p>View list of tutorials click <a href="/all">here</a></p>
+   </body>
+   </html>
+   ```
+
+2. Update the TutorialService.java to include a new method to display list of records page.
+
+   ```java
+   import org.springframework.beans.factory.annotation.Autowired;
+   import org.springframework.stereotype.Controller;
+   import org.springframework.ui.Model;
+   import org.springframework.web.bind.annotation.GetMapping;
+   import org.springframework.web.bind.annotation.ModelAttribute;
+   import org.springframework.web.bind.annotation.PostMapping;
+
+   @Controller
+   public class TutorialService {
+       @Autowired
+       TutorialRepository tutorialRepository;
+
+       @GetMapping("/addnew")
+       public String addNewForm(Model model) {
+           model.addAttribute("tutorial", new Tutorial());
+           return "addnew";
+       }
+
+       @PostMapping("/addnew")
+       public String addNewSubmit(@ModelAttribute Tutorial tutorial, Model model) {
+           Tutorial _tutorial = tutorialRepository
+                       .save(new Tutorial(tutorial.getTitle(), tutorial.getDescription(), tutorial.isPublished()));
+           model.addAttribute("tutorial", _tutorial);
+           return "result";
+       }
+
+       @GetMapping("/all")
+       public String showAll(Model model) {
+           model.addAttribute("tutorials", tutorialRepository.findAll());
+           return "alltutorials";
+       }
+   }
+   ```
+
+3. Create a new page all
