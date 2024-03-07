@@ -104,8 +104,18 @@ In this activity, we are going to add web pages/forms to our spring data jpa pro
        }
    }
    ```
-   
-4. Create the 'Add New Tutorial' form page in this location src/main/resources/templates
+
+   This controller is concise and simple, but a lot is going on. The rest of this section analyzes it step by step.
+   - The mapping annotations let you map HTTP requests to specific controller methods. The two methods in this controller are both mapped to /addnew.
+   - You can use @RequestMapping (which, by default, maps all HTTP operations, such as GET, POST, and so forth).
+   - However, in this case, the addNewForm() method is specifically mapped to GET by using @GetMapping, while addNewSubmit() is mapped to POST with @PostMapping.
+   - This mapping lets the controller differentiate the requests to the /addnew endpoint.
+   - The addNewForm() method uses a Model object to expose a new Tutorial to the view template.
+   - The implementation of the method body relies on a view technology to perform server-side rendering of the HTML by converting the view name (addnew) into a template to render.
+   - In this case, we use Thymeleaf, which parses the addnew.html template and evaluates the various template expressions to render the form.
+   - The following listing (from src/main/resources/templates/addnew.html) shows the addnew template.
+
+5. Create the 'Add New Tutorial' form page in this location src/main/resources/templates
 
    ```html
    <!DOCTYPE HTML>
@@ -126,6 +136,17 @@ In this activity, we are going to add web pages/forms to our spring data jpa pro
    </html>
    ```
 
+   - The th:action="@{/addnew}" expression directs the form to POST to the /addnew endpoint, while the th:object="${tutorial}" expression declares the model object to use for collecting the form data.
+   - The three form fields, expressed with th:field="{id}", th:field="{title}" and th:field="{description}", correspond to the fields in the Tutorial object.
+   - That covers the controller, model, and view for presenting the form. Now we can review the process of submitting the form.
+   - As noted earlier, the form submits to the /addnew endpoint by using a POST call.
+   - The addNewSubmit() method receives the Tutorial object that was populated by the form.
+   - The Tutorial is a @ModelAttribute, so it is bound to the incoming form content.
+   - Also, the submitted data can be rendered in the result view by referring to it by name (by default, the name of the method parameter, so tutorial in this case).
+   - The id is rendered in the <p th:text="'id: ' + ${tutorial.id}" /> expression.
+   - Likewise, the title is rendered in the <p th:text="'title: ' + ${tutorial.title}" /> expression.
+   - The following listing (from src/main/resources/templates/result.html) shows the result template.
+
 4. Create the 'Result' page in this location src/main/resources/templates
 
    ```html
@@ -145,3 +166,5 @@ In this activity, we are going to add web pages/forms to our spring data jpa pro
    </body>
    </html>
    ```
+
+   For clarity, this example uses two separate view templates for rendering the form and displaying the submitted data. However, you can use a single view for both purposes.
