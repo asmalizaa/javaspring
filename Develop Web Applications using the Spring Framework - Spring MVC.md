@@ -35,7 +35,7 @@ Now, the question is What is Front Controller? It is quite simple, as the name s
 
 ## Activity: Spring Web MVC
 
-In this activity, we are going to add a form to add a new tutorial.
+In this activity, we are going to create a form to add a new tutorial.
 
 **Steps**
 
