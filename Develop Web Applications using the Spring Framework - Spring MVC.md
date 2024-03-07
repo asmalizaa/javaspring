@@ -54,16 +54,15 @@ In this activity, we are going to add web pages/forms to our spring data jpa pro
      </dependency>
      ```
 
-     - Spring Boot Devtools
-
-       ```xml
-       <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
-       ```
+   - Spring Boot Devtools
+     ```xml
+     <dependency>
+     	<groupId>org.springframework.boot</groupId>
+     	<artifactId>spring-boot-devtools</artifactId>
+     	<scope>runtime</scope>
+     	<optional>true</optional>
+     </dependency>
+     ```
 
 2. Add a welcome page.
 
