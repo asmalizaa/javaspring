@@ -31,4 +31,5 @@ Now, the question is What is Front Controller? It is quite simple, as the name s
 3. The object of ModelAndView is returned by the controller.
 4. The DispatcherServlet checks the entry of the view resolver in the XML file and invokes the appropriate view component.
 
+![image](https://github.com/asmalizaa/javaspring/assets/23090837/c8cc88ad-6406-4ff8-9e5d-eb2cd11c5f54)
 
