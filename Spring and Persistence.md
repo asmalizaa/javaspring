@@ -96,6 +96,16 @@ If you have already an existing Maven project and want to add Spring Data JPA de
 </dependency>
 ```
 
+### Add PostgreSQL dependency into existing project
+
+```xml
+<dependency>
+	<groupId>org.postgresql</groupId>
+		<artifactId>postgresql</artifactId>
+		<scope>runtime</scope>
+</dependency>
+```
+
 ### Connect to PostgreSQL database
 
 NOTES: Make sure a database called 'testdb' has been created before continuing to next step.
