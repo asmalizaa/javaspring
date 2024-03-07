@@ -92,18 +92,19 @@ In this activity, we are going to add web pages/forms to our spring data jpa pro
    @Controller
    public class TutorialService {
        @GetMapping("/addnew")
-       public String greetingForm(Model model) {
+       public String addNewForm(Model model) {
            model.addAttribute("tutorial", new Tutorial());
            return "addnew";
        }
 
        @PostMapping("/addnew")
-       public String greetingSubmit(@ModelAttribute Tutorial tutorial, Model model) {
+       public String addNewSubmit(@ModelAttribute Tutorial tutorial, Model model) {
            model.addAttribute("tutorial", tutorial);
            return "result";
        }
    }
    ```
+   
 4. Create the 'Add New Tutorial' form page in this location src/main/resources/templates
 
    ```html
