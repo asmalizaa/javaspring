@@ -4,29 +4,31 @@ Reference: (https://docs.spring.io/spring-framework/reference/web/webmvc.html)
 
 Spring Web MVC is the original web framework built on the Servlet API and has been included in the Spring Framework from the very beginning. The formal name, "Spring Web MVC," comes from the name of its source module (spring-webmvc), but it is more commonly known as "Spring MVC".
 
+## What is Spring MVC?
+
+Spring MVC is a Java-based framework that is mostly used for developing web applications. It follows the MVC (Model-View-Controller) Design Pattern. This design pattern specifies that an application consists of a data model, presentation information, and control information.
+
+This framework is developed around a DispatcherServlet which dispatches requests to handlers. In the current industry, many of them are using Spring Boot Microservices, but there are many projects still running in Spring MVC. So it is worth learning Spring MVC in the recent era. That’s why we are going to cover all the things which are part of the Spring MVC framework one by one in an organized manner.
+
+## Spring – MVC Framework
+
+Spring MVC Framework follows the Model-View-Controller architectural design pattern which works around the Front Controller i.e. the Dispatcher Servlet. The Dispatcher Servlet handles and dispatches all the incoming HTTP requests to the appropriate controller. It uses @Controller and @RequestMapping as default request handlers. The @Controller annotation defines that a particular class is a controller. @RequestMapping annotation maps web requests to Spring Controller methods. The terms model, view, and controller are as follows:
+
+- Model: The Model encapsulates the application data.
+- View: View renders the model data and generates HTML output that the client’s browser can interpret.
+- Controller: The Controller processes the user requests and passes them to the view for rendering.
+
 ## DispatcherServlet
 
-Spring MVC, as many other web frameworks, is designed around the front controller pattern where a central Servlet, the DispatcherServlet, provides a shared algorithm for request processing, while actual work is performed by configurable delegate components. This model is flexible and supports diverse workflows.
+Dispatcher Servlet is the front controller that manages the entire HTTP request and response handling process. 
 
-The DispatcherServlet, as any Servlet, needs to be declared and mapped according to the Servlet specification by using Java configuration or in web.xml. In turn, the DispatcherServlet uses Spring configuration to discover the delegate components it needs for request mapping, view resolution, exception handling, and more.
+Now, the question is What is Front Controller? It is quite simple, as the name suggests, when any web requests are made, the requests will come first to the front Controller which is nothing but the Dispatcher Servlet. The Front Controller stands first that is why it’s name is like this. After the requests comes into this, the dispatcher servlet accepts the requests and decides which controller will be suitable to handle these requests. Then it dispatches the HTTP requests to specific controller.
 
-The following example of the Java configuration registers and initializes the DispatcherServlet, which is auto-detected by the Servlet container (see Servlet Config):
+![image](https://github.com/asmalizaa/javaspring/assets/23090837/1bae210f-cfab-4f89-8487-34b56ccc6306)
 
-```java
-public class MyWebApplicationInitializer implements WebApplicationInitializer {
+1. All the incoming requests are intercepted by the DispatcherServlet that works as the front controller.
+2. The DispatcherServlet then gets an entry of handler mapping from the XML file and forwards the request to the controller.
+3. The object of ModelAndView is returned by the controller.
+4. The DispatcherServlet checks the entry of the view resolver in the XML file and invokes the appropriate view component.
 
-	@Override
-	public void onStartup(ServletContext servletContext) {
 
-		// Load Spring web application configuration
-		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-		context.register(AppConfig.class);
-
-		// Create and register the DispatcherServlet
-		DispatcherServlet servlet = new DispatcherServlet(context);
-		ServletRegistration.Dynamic registration = servletContext.addServlet("app", servlet);
-		registration.setLoadOnStartup(1);
-		registration.addMapping("/app/*");
-	}
-}
-```
