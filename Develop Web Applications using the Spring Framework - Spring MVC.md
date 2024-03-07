@@ -54,7 +54,7 @@ In this activity, we are going to add web pages/forms to our spring data jpa pro
      </dependency>
      ```
 
-   - Spring Boot Devtools
+   - Spring Boot Devtools (if needed).
      ```xml
      <dependency>
      	<groupId>org.springframework.boot</groupId>
@@ -80,7 +80,7 @@ In this activity, we are going to add web pages/forms to our spring data jpa pro
    </html>
    ```
    
-4. Create a TutorialService class that will act as the Controller.
+3. Create a TutorialService class that will act as the Controller.
 
    ```java
    import org.springframework.stereotype.Controller;
@@ -104,4 +104,43 @@ In this activity, we are going to add web pages/forms to our spring data jpa pro
        }
    }
    ```
-   
+4. Create the 'Add New Tutorial' form page.
+
+   ```html
+   <!DOCTYPE HTML>
+   <html xmlns:th="https://www.thymeleaf.org">
+   <head>
+      <title>Add New Tutorial</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   </head>
+   <body>
+      <h1>Add New Tutorial</h1>
+      <form action="#" th:action="@{/addnew}" th:object="${tutorial}" method="post">
+         <p>Id: <input type="text" th:field="*{id}" /></p>
+         <p>Title: <input type="text" th:field="*{title}" /></p>
+         <p>Description: <input type="text" th:field="*{description}" /></p>
+         <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+      </form>
+   </body>
+   </html>
+   ```
+
+4. Create the 'Result' page.
+
+   ```html
+   <!DOCTYPE HTML>
+   <html xmlns:th="https://www.thymeleaf.org">
+   <head>
+      <title>Result</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   </head>
+   <body>
+      <h1>Result</h1>
+      <p th:text="'id: ' + ${tutorial.id}" />
+      <p th:text="'title: ' + ${tutorial.title}" />
+      <p th:text="'description: ' + ${tutorial.description}" />
+      <p th:text="'published: ' + ${tutorial.published}" />
+      <a href="/addnew">Add another</a>
+   </body>
+   </html>
+   ```
