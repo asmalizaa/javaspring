@@ -64,7 +64,7 @@ In this activity, we are going to add web pages/forms to our spring data jpa pro
      </dependency>
      ```
 
-2. Add a welcome page.
+2. Add a welcome page in this location src/main/resources/static
 
    ```html
    <!DOCTYPE html>
@@ -104,7 +104,7 @@ In this activity, we are going to add web pages/forms to our spring data jpa pro
        }
    }
    ```
-4. Create the 'Add New Tutorial' form page.
+4. Create the 'Add New Tutorial' form page in this location src/main/resources/templates
 
    ```html
    <!DOCTYPE HTML>
@@ -125,7 +125,7 @@ In this activity, we are going to add web pages/forms to our spring data jpa pro
    </html>
    ```
 
-4. Create the 'Result' page.
+4. Create the 'Result' page in this location src/main/resources/templates
 
    ```html
    <!DOCTYPE HTML>
