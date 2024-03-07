@@ -134,8 +134,6 @@ logging.level.org.hibernate.SQL=DEBUG
 Our Data model is Tutorial with four fields: id, title, description, published.
 
 ```java
-package com.example.springjpademo;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -211,10 +209,7 @@ public class Tutorial {
 Let us create a repository to interact with Tutorials from the database.
 
 ```java
-package com.example.springjpademo;
-
 import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TutorialRepository extends JpaRepository<Tutorial, Long> {
@@ -235,8 +230,6 @@ Now we can use JpaRepository’s methods: save(), findOne(), findById(), findAll
 Finally, we create a controller that provides APIs for creating, retrieving, updating, deleting and finding Tutorials.
 
 ```java
-package com.example.springjpademo;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
