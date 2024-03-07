@@ -108,7 +108,7 @@ If you have already an existing Maven project and want to add Spring Data JPA de
 
 ### Connect to PostgreSQL database
 
-NOTES: Make sure a database called 'testdb' has been created before continuing to next step.
+**NOTES: Make sure a database called 'testdb' has been created before continuing to next step.**
 
 Add below configurations into application.properties file
 
