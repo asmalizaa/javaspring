@@ -141,4 +141,44 @@ In this activity, we are going to create a page to display list of records.
    }
    ```
 
-3. Create a new page all
+3. Create a new page all alltutorials.html in src/main/resources/templates
+
+   ```html
+   <!DOCTYPE html>
+   <html xmlns:th="https://www.thymeleaf.org">
+   <head>
+       <meta charset="UTF-8">
+       <title>List of Tutorials</title>
+   </head>
+   <body>
+       <h1>List of Tutorials</h1>
+       <table>
+       <thead>
+           <tr>
+               <th>ID</th>
+               <th>Title</th>
+               <th>Description</th>
+               <th>Published</th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr th:if="${tutorials.empty}">
+               <td colspan="2">No Records Found</td>
+           </tr>
+           <tr th:each="tutorial : ${tutorials}">
+               <td><span th:text="${tutorial.id}"> ID </span></td>
+               <td><span th:text="${tutorial.title}"> Title </span></td>
+               <td><span th:text="${tutorial.description}"> Description </span></td>
+               <td><span th:text="${tutorial.published}"> Published </span></td>
+           </tr>
+       </tbody>
+       </table>
+   </body>
+   </html>
+   ```
+   
+4. Run and test. You should see a page that looks like below.
+
+   <img width="154" alt="image" src="https://github.com/asmalizaa/javaspring/assets/23090837/61e70394-c698-4635-b608-da32d07f0deb">
+
+The end.
