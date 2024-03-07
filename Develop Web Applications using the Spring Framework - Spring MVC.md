@@ -123,7 +123,6 @@ In this activity, we are going to add a form to add a new tutorial.
    <body>
       <h1>Add New Tutorial</h1>
       <form action="#" th:action="@{/addnew}" th:object="${tutorial}" method="post">
-         <p>Id: <input type="text" th:field="*{id}" /></p>
          <p>Title: <input type="text" th:field="*{title}" /></p>
          <p>Description: <input type="text" th:field="*{description}" /></p>
          <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
