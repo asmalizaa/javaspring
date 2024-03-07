@@ -12,6 +12,8 @@ ORM sets the mapping between the set of objects which are written in the preferr
 
 ## What is JPA?
 
+Reference: (https://jakarta.ee/learn/docs/jakartaee-tutorial/current/persist/persistence-intro/persistence-intro.html)
+
 The Java Persistence API (JPA) is a specification of Java. It is used to persist data between Java object and relational database. JPA acts as a bridge between object-oriented domain models and relational database systems.
 
 As JPA is just a specification, it does not perform any operation by itself. It requires an implementation. So, ORM tools like Hibernate, TopLink and iBatis implements JPA specifications for data persistence.
