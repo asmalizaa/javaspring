@@ -33,3 +33,76 @@ Now, the question is What is Front Controller? It is quite simple, as the name s
 
 ![image](https://github.com/asmalizaa/javaspring/assets/23090837/c8cc88ad-6406-4ff8-9e5d-eb2cd11c5f54)
 
+## Activity: Spring Web MVC
+
+In this activity, we are going to add web pages/forms to our spring data jpa project to perform below tasks.
+1. Add new tutorial.
+2. Display list of tutorials.
+3. Update tutorial.
+4. Delete tutorial.
+
+**Steps**
+
+1. Add dependencies to your existing project.
+
+   - Thymeleaf dependency to your project (if needed).
+
+     ```xml
+     <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-thymeleaf</artifactId>
+     </dependency>
+     ```
+
+     - Spring Boot Devtools
+
+       ```xml
+       <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+       ```
+
+2. Add a welcome page.
+
+   ```html
+   <!DOCTYPE html>
+   <html>
+       <head>
+           <meta charset="UTF-8">
+           <title>Welcome Page</title>
+       </head>
+   <body>
+       <h1>Welcome Page</h1>
+       <p>Add new tutorial click <a href="/addnew">here</a></p>
+   </body>
+   </html>
+   ```
+   
+4. Create a TutorialService class that will act as the Controller.
+
+   ```java
+   import org.springframework.stereotype.Controller;
+   import org.springframework.ui.Model;
+   import org.springframework.web.bind.annotation.GetMapping;
+   import org.springframework.web.bind.annotation.ModelAttribute;
+   import org.springframework.web.bind.annotation.PostMapping;
+
+   @Controller
+   public class TutorialService {
+       @GetMapping("/addnew")
+       public String greetingForm(Model model) {
+           model.addAttribute("tutorial", new Tutorial());
+           return "addnew";
+       }
+
+       @PostMapping("/addnew")
+       public String greetingSubmit(@ModelAttribute Tutorial tutorial, Model model) {
+           model.addAttribute("tutorial", tutorial);
+           return "result";
+       }
+   }
+   ```
+   
