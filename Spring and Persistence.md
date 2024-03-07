@@ -101,8 +101,8 @@ If you have already an existing Maven project and want to add Spring Data JPA de
 ```xml
 <dependency>
 	<groupId>org.postgresql</groupId>
-		<artifactId>postgresql</artifactId>
-		<scope>runtime</scope>
+	<artifactId>postgresql</artifactId>
+	<scope>runtime</scope>
 </dependency>
 ```
 
