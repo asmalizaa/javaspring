@@ -143,8 +143,8 @@ In this activity, we are going to add web pages/forms to our spring data jpa pro
    - The addNewSubmit() method receives the Tutorial object that was populated by the form.
    - The Tutorial is a @ModelAttribute, so it is bound to the incoming form content.
    - Also, the submitted data can be rendered in the result view by referring to it by name (by default, the name of the method parameter, so tutorial in this case).
-   - The id is rendered in the <p th:text="'id: ' + ${tutorial.id}" /> expression.
-   - Likewise, the title is rendered in the <p th:text="'title: ' + ${tutorial.title}" /> expression.
+   - The id is rendered in the ```<p th:text="'id: ' + ${tutorial.id}" />``` expression.
+   - Likewise, the title is rendered in the ```<p th:text="'title: ' + ${tutorial.title}" />``` expression.
    - The following listing (from src/main/resources/templates/result.html) shows the result template.
 
 4. Create the 'Result' page in this location src/main/resources/templates
