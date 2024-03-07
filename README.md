@@ -21,4 +21,4 @@
 19. [Transaction Management](https://github.com/asmalizaa/javaspring/blob/main/Transaction%20Management.md)
 20. [Develop Web Applications using the Spring Framework - Spring MVC](https://github.com/asmalizaa/javaspring/blob/main/Develop%20Web%20Applications%20using%20the%20Spring%20Framework%20-%20Spring%20MVC.md)
 21. [Thymeleaf](https://github.com/asmalizaa/javaspring/blob/main/Thymeleaf.md)
-22. Spring Security
+22. [Spring Security](https://github.com/asmalizaa/javaspring/blob/main/Spring%20Security.md)
