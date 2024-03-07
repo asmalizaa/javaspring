@@ -35,11 +35,7 @@ Now, the question is What is Front Controller? It is quite simple, as the name s
 
 ## Activity: Spring Web MVC
 
-In this activity, we are going to add web pages/forms to our spring data jpa project to perform below tasks.
-1. Add new tutorial.
-2. Display list of tutorials.
-3. Update tutorial.
-4. Delete tutorial.
+In this activity, we are going to add a form to add a new tutorial.
 
 **Steps**
 
@@ -179,3 +175,4 @@ In this activity, we are going to add web pages/forms to our spring data jpa pro
 
    <img width="119" alt="image" src="https://github.com/asmalizaa/javaspring/assets/23090837/4164c91b-0d90-40bb-bf81-6c58305eac98">
 
+   Congratulations! You have just used Spring to create and submit a form.
