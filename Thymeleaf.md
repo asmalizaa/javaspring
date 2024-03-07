@@ -1,3 +1,85 @@
 # Thymeleaf
 
 [Thymeleaf](http://www.thymeleaf.org/) is a Java template engine for processing and creating HTML, XML, JavaScript, CSS and text.
+
+Thymeleaf's main goal is to bring elegant natural templates to your development workflow — HTML that can be correctly displayed in browsers and also work as static prototypes, allowing for stronger collaboration in development teams.
+
+The library is extremely extensible, and its natural templating capability ensures we can prototype templates without a back end. This makes development very fast when compared with other popular template engines such as JSP.
+
+## Natural Templates
+
+HTML templates written in Thymeleaf still look and work like HTML, letting the actual templates that are run in your application keep working as useful design artifacts.
+
+```html
+<table>
+<thead>
+    <tr>
+      <th th:text="#{msgs.headers.name}">Name</th>
+      <th th:text="#{msgs.headers.price}">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="prod: ${allProducts}">
+      <td th:text="${prod.name}">Oranges</td>
+      <td th:text="${#numbers.formatDecimal(prod.price, 1, 2)}">0.99</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+## Spring MVC and Thymeleaf: how to access data from templates
+
+Reference: (https://www.thymeleaf.org/doc/articles/springmvcaccessdata.html)
+
+In a typical Spring MVC application, @Controller classes are responsible for preparing a model map with data and selecting a view to be rendered. This model map allows for the complete abstraction of the view technology and, in the case of Thymeleaf, it is transformed into a Thymeleaf context object (part of the Thymeleaf template execution context) that makes all the defined variables available to expressions executed in templates.
+
+## Spring model attributes
+
+Spring MVC calls the pieces of data that can be accessed during the execution of views model attributes. The equivalent term in Thymeleaf language is context variables.
+
+There are several ways of adding model attributes to a view in Spring MVC. Below you will find some common cases.
+
+Add attribute to Model via its addAttribute method.
+
+```java
+@RequestMapping(value = "message", method = RequestMethod.GET)
+public String messages(Model model) {
+    model.addAttribute("messages", messageRepository.findAll());
+    return "message/list";
+}
+```
+
+Return ModelAndView with model attributes included.
+
+```java
+@RequestMapping(value = "message", method = RequestMethod.GET)
+public ModelAndView messages() {
+    ModelAndView mav = new ModelAndView("message/list");
+    mav.addObject("messages", messageRepository.findAll());
+    return mav;
+}
+```
+
+Expose common attributes via methods annotated with @ModelAttribute
+
+```java
+@ModelAttribute("messages")
+public List<Message> messages() {
+    return messageRepository.findAll();
+}
+```
+
+As you may have noticed, in all the above cases the messages attribute is added to the model and it will be available in Thymeleaf views.
+
+In Thymeleaf, these model attributes (or context variables in Thymeleaf jargon) can be accessed with the following syntax: ${attributeName}, where attributeName in our case is messages. This is a Spring EL expression. In short, Spring EL (Spring Expression Language) is a language that supports querying and manipulating an object graph at runtime.
+
+You can access model attributes in views with Thymeleaf as follows.
+
+```html
+ <tr th:each="message : ${messages}">
+    <td th:text="${message.id}">1</td>
+    <td><a href="#" th:text="${message.title}">Title ...</a></td>
+    <td th:text="${message.text}">Text ...</td>
+</tr>
+```
+
