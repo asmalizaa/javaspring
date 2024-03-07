@@ -266,4 +266,6 @@ If you click on the Sign Out button, your authentication is revoked, and you are
 
 Congratulations! You have developed a simple web application that is secured with Spring Security.
 
+Additional reading [How to do user authentication in Spring Boot using PostgreSQL database?](https://fullstackdeveloper.guru/2020/06/05/how-to-do-user-authentication-in-spring-boot-using-postgresql-database/comment-page-1/)
+
 
