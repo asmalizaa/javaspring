@@ -239,13 +239,11 @@ NOTES: We are going to continue this example using previous (existing) project c
        @Autowired
        private AddressService addressService;
 
-       @Transactional
        public Employee addEmployee(Employee employee) throws Exception {
            Employee employeeSavedToDB = this.employeeRepository.save(employee);
 
            // we will initialize the address object as null
            Address address = null;
-           address.setId(123L);
            address.setAddress("Varanasi");
            address.setEmployee(employee);
 
@@ -262,7 +260,39 @@ NOTES: We are going to continue this example using previous (existing) project c
 
 7. Transaction management.
 
-   To overcome this problem, we will use @Transactional annotation. This will ensure that the transaction should be complete. That is, either both employee and address data should be stored or nothing will get stored. For using transaction management, we need to use @EnableTransactionManagement in the main class of our spring boot application and also, and we need to annotate our addEmployee() method in EmployeeService class with @Transactional annotation.
+   To overcome this problem, we will use @Transactional annotation. This will ensure that the transaction should be complete. That is, either both employee and address data should be stored or nothing will get stored.
+
+   ```java
+   import jakarta.transaction.Transactional;
+   import org.springframework.beans.factory.annotation.Autowired;
+   import org.springframework.stereotype.Service;
+
+   @Service
+   public class EmployeeService {
+       @Autowired
+       private EmployeeRepository employeeRepository;
+
+       @Autowired
+       private AddressService addressService;
+
+       @Transactional
+       public Employee addEmployee(Employee employee) throws Exception {
+           Employee employeeSavedToDB = this.employeeRepository.save(employee);
+
+           // we will initialize the address object as null
+           Address address = null;
+           address.setId(123L);
+           address.setAddress("Varanasi");
+           address.setEmployee(employee);
+
+           // calling addAddress() method of AddressService class
+           this.addressService.addAddress(address);
+           return employeeSavedToDB;
+       }
+   }
+   ```
+   
+   For using transaction management, we need to use @EnableTransactionManagement in the main class of our spring boot application and also, and we need to annotate our addEmployee() method in EmployeeService class with @Transactional annotation.
 
    ```java
    import org.springframework.boot.SpringApplication;
@@ -278,7 +308,7 @@ NOTES: We are going to continue this example using previous (existing) project c
    }
    ```
 
-8. Run the application.
+9. Run the application.
 
    Now, we have enabled transaction management for our application. We will again delete the tables from our database and request our application to add an employee.
 
