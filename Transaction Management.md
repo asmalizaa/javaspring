@@ -45,12 +45,12 @@ NOTES: We are going to continue this example using previous (existing) project c
    @Table(name = "employee")
    public class Employee {
 
-      @Id
-    	@GeneratedValue(strategy = GenerationType.AUTO)
-    	private int id;
-    
-    	@Column(name = "name")
-    	private String name;
+       @Id
+       @GeneratedValue(strategy = GenerationType.AUTO)
+       private int id;
+
+       @Column(name = "name")
+       private String name;
 
        public int getId() {
            return id;
