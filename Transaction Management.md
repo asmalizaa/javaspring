@@ -159,7 +159,6 @@ NOTES: We are going to continue this example using previous (existing) project c
          Employee employeeSavedToDB = this.employeeRepository.save(employee);
 
          Address address = new Address();
-         address.setId(123L);
          address.setAddress("Varanasi");
          address.setEmployee(employee);
 
