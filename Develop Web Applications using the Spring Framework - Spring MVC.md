@@ -209,3 +209,6 @@ In this activity, we are going to create a form to add a new tutorial.
        }
    }
    ```
+
+   Make sure to check the database table to ensure the new record was successfully added.
+   
