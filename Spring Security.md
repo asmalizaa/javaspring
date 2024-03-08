@@ -248,6 +248,8 @@ When you click on the link, it attempts to take you to the greeting page at /hel
 
 ![image](https://github.com/asmalizaa/javaspring/assets/23090837/97bcdb42-996a-44b0-a836-779dd25b5175)
 
+**Note: please check your console for generated password and use this password instead to login.**
+
 At the login page, sign in as the test user by entering user and password for the username and password fields, respectively. Once you submit the login form, you are authenticated and then taken to the greeting page, as the following image shows.
 
 ![image](https://github.com/asmalizaa/javaspring/assets/23090837/2dfd8d52-8c37-445e-b22a-b292a77bc7d0)
