@@ -281,7 +281,6 @@ NOTES: We are going to continue this example using previous (existing) project c
 
            // we will initialize the address object as null
            Address address = null;
-           address.setId(123L);
            address.setAddress("Varanasi");
            address.setEmployee(employee);
 
