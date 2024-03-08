@@ -175,3 +175,37 @@ In this activity, we are going to create a form to add a new tutorial.
    <img width="119" alt="image" src="https://github.com/asmalizaa/javaspring/assets/23090837/4164c91b-0d90-40bb-bf81-6c58305eac98">
 
    Congratulations! You have just used Spring to create and submit a form.
+
+6. To save the new record into database table, update the controller with below codes.
+
+   ```java
+   import org.springframework.beans.factory.annotation.Autowired;
+   import org.springframework.stereotype.Controller;
+   import org.springframework.ui.Model;
+   import org.springframework.web.bind.annotation.GetMapping;
+   import org.springframework.web.bind.annotation.ModelAttribute;
+   import org.springframework.web.bind.annotation.PostMapping;
+
+   @Controller
+   public class TutorialService {
+       // to save record to db
+       // first inject the repository object
+       @Autowired
+       TutorialRepository tutorialRepository;
+
+       @GetMapping("/addnew")
+       public String addNewForm(Model model) {
+           model.addAttribute("tutorial", new Tutorial());
+           return "addnew";
+       }
+
+       @PostMapping("/addnew")
+       public String addNewSubmit(@ModelAttribute Tutorial tutorial, Model model) {
+           // save new tutorial into db and the return result view
+           Tutorial _tutorial = tutorialRepository
+               .save(new Tutorial(tutorial.getTitle(), tutorial.getDescription(), tutorial.isPublished()));
+           model.addAttribute("tutorial", _tutorial);
+           return "result";
+       }
+   }
+   ```
