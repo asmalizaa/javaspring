@@ -41,6 +41,8 @@ When a user or a device is authenticated, the next step is authorization which i
 
 Reference: (https://spring.io/guides/gs/securing-web)
 
+**Thymeleaf 3.1 no longer provides access to HttpServletRequest so HttpServletRequest#getRemoteUser() cannot be used to access the currently authenticated user.**
+
 ### Starting with Spring Initializr
 
 Use Spring Initializr to create a new project with below settings.
