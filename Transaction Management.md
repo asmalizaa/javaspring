@@ -34,14 +34,12 @@ NOTES: We are going to continue this example using previous (existing) project c
    In this step, we will create our model class. Here, we will be creating two model classes, Employee and Address.
 
    ```java
-   package com.example.springjpademo;
-
-   import javax.persistence.Column;
-   import javax.persistence.Entity;
-   import javax.persistence.GeneratedValue;
-   import javax.persistence.GenerationType;
-   import javax.persistence.Id;
-   import javax.persistence.Table;
+   import jakarta.persistence.Column;
+   import jakarta.persistence.Entity;
+   import jakarta.persistence.GeneratedValue;
+   import jakarta.persistence.GenerationType;
+   import jakarta.persistence.Id;
+   import jakarta.persistence.Table;
 
    @Entity
    @Table(name = "employee")
@@ -73,14 +71,12 @@ NOTES: We are going to continue this example using previous (existing) project c
     ```
 
    ```java
-   package com.example.springjpademo;
-
-   import javax.persistence.Entity;
-   import javax.persistence.GeneratedValue;
-   import javax.persistence.GenerationType;
-   import javax.persistence.Id;
-   import javax.persistence.OneToOne;
-   import javax.persistence.Table;
+   import jakarta.persistence.Entity;
+   import jakarta.persistence.GeneratedValue;
+   import jakarta.persistence.GenerationType;
+   import jakarta.persistence.Id;
+   import jakarta.persistence.OneToOne;
+   import jakarta.persistence.Table;
 
    @Entity
    @Table(name = "address")
@@ -125,8 +121,6 @@ NOTES: We are going to continue this example using previous (existing) project c
 2. Create the repositories.
 
    ```java
-   package com.example.springjpademo;
-
    import org.springframework.data.jpa.repository.JpaRepository;
 
    public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
@@ -135,8 +129,6 @@ NOTES: We are going to continue this example using previous (existing) project c
    ```
 
    ```java
-   package com.example.springjpademo;
-
    import org.springframework.data.jpa.repository.JpaRepository;
 
    public interface AddressRepository extends JpaRepository<Address, Integer> {
@@ -149,9 +141,7 @@ NOTES: We are going to continue this example using previous (existing) project c
    You can use @Transactional annotation in service layer which will result interacting with the database. In this step, we will create a service layer for our application and add business logic to it. For this, we will be creating two classes EmployeeService and AddressService. In EmployeeService class we are throwing an exception.
 
    ```java
-   package com.example.springjpademo;
-
-   import javax.transaction.Transactional;
+   import jakarta.transaction.Transactional;
    import org.springframework.beans.factory.annotation.Autowired;
    import org.springframework.stereotype.Service;
 
@@ -180,8 +170,6 @@ NOTES: We are going to continue this example using previous (existing) project c
    ```
 
    ```java
-   package com.example.springjpademo;
-
    import org.springframework.beans.factory.annotation.Autowired;
    import org.springframework.stereotype.Service;
 
@@ -202,8 +190,6 @@ NOTES: We are going to continue this example using previous (existing) project c
    In this step, we will create a controller for our application. For this, we will create a Controller class and add all the mappings to it.
 
    ```java
-   package com.example.springjpademo;
-
    import org.springframework.beans.factory.annotation.Autowired;
    import org.springframework.http.HttpStatus;
    import org.springframework.http.ResponseEntity;
@@ -241,9 +227,7 @@ NOTES: We are going to continue this example using previous (existing) project c
    In this step, we will break down our transaction. For this, we will initialize the address object with a NULL value in our EmployeeService class.
 
    ```java
-   package com.example.springjpademo;
-
-   import javax.transaction.Transactional;
+   import jakarta.transaction.Transactional;
    import org.springframework.beans.factory.annotation.Autowired;
    import org.springframework.stereotype.Service;
 
@@ -281,8 +265,6 @@ NOTES: We are going to continue this example using previous (existing) project c
    To overcome this problem, we will use @Transactional annotation. This will ensure that the transaction should be complete. That is, either both employee and address data should be stored or nothing will get stored. For using transaction management, we need to use @EnableTransactionManagement in the main class of our spring boot application and also, and we need to annotate our addEmployee() method in EmployeeService class with @Transactional annotation.
 
    ```java
-   package com.example.springjpademo;
-
    import org.springframework.boot.SpringApplication;
    import org.springframework.boot.autoconfigure.SpringBootApplication;
    import org.springframework.transaction.annotation.EnableTransactionManagement;
