@@ -37,7 +37,7 @@ AuthenticationException is a runtime exception. It is usually handled by an appl
 
 When a user or a device is authenticated, the next step is authorization which is the process of allowing the authority to perform certain tasks or operations. In Java, AccessDecisionManager and AccessDecsionVoter classes help in the authorization process. 
 
-## Activity: Securing a Web Application
+## Activity 1: Securing a Web Application
 
 Reference: (https://spring.io/guides/gs/securing-web)
 
@@ -268,6 +268,129 @@ If you click on the Sign Out button, your authentication is revoked, and you are
 
 Congratulations! You have developed a simple web application that is secured with Spring Security.
 
+## Activity 2: How to do user authentication in Spring Boot using PostgreSQL database
+
 Additional reading [How to do user authentication in Spring Boot using PostgreSQL database?](https://fullstackdeveloper.guru/2020/06/05/how-to-do-user-authentication-in-spring-boot-using-postgresql-database/comment-page-1/)
 
+This activity will be using our previous "Spring and Persistence" project.
 
+1. Add dependency.
+
+   ```xml
+   <dependency>
+   	<groupId>org.springframework.boot</groupId>
+   	<artifactId>spring-boot-starter-security</artifactId>
+   </dependency>
+   ```
+
+   spring-boot-starter-security is for authentication
+
+2. Create user entity class.
+
+   ```java
+   import java.util.HashSet;
+   import java.util.Set;
+
+   import org.springframework.security.core.GrantedAuthority;
+   import org.springframework.security.core.authority.SimpleGrantedAuthority;
+   import org.springframework.security.core.userdetails.UserDetails;
+
+   import jakarta.persistence.Entity;
+   import jakarta.persistence.Id;
+   import jakarta.persistence.Table;
+
+   @Entity
+   @Table(name = "user_table")
+   public class User implements UserDetails {
+   	private static final long serialVersionUID = 1L;
+   @Id
+	private Integer id;
+
+	private String username;
+
+	private String password;
+
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
+	}
+
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Override
+	public Set<GrantedAuthority> getAuthorities() {
+		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+		authorities.add(new SimpleGrantedAuthority("USER"));
+		return authorities;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + "]";
+	}
+
+}
+   ```
+
+   Notice that the table name is given as “user_table” and not “user”. This is because in PostgreSQL , “user” is a restricted word and you cannot use it to create tables.
+   
