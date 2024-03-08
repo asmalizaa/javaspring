@@ -71,6 +71,7 @@ NOTES: We are going to continue this example using previous (existing) project c
     ```
 
    ```java
+   import jakarta.persistence.Column;
    import jakarta.persistence.Entity;
    import jakarta.persistence.GeneratedValue;
    import jakarta.persistence.GenerationType;
