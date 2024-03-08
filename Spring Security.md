@@ -303,11 +303,10 @@ This activity will be using our previous "Spring and Persistence" project.
    @Table(name = "user_table")
    public class User implements UserDetails {
    	private static final long serialVersionUID = 1L;
-   @Id
+
+   	@Id
 	private Integer id;
-
 	private String username;
-
 	private String password;
 
 	/**
@@ -389,8 +388,8 @@ This activity will be using our previous "Spring and Persistence" project.
 		return "User [id=" + id + ", username=" + username + ", password=" + password + "]";
 	}
 
-}
+   }
    ```
 
-   Notice that the table name is given as “user_table” and not “user”. This is because in PostgreSQL , “user” is a restricted word and you cannot use it to create tables.
+   Notice that the table name is given as "user_table" and not "user". This is because in PostgreSQL , "user" is a restricted word and you cannot use it to create tables.
    
